@@ -85,14 +85,24 @@ function renderHeadline() {
 }
 
 function renderAreaCards() {
-  areaCards.innerHTML = payload.areas.map((area, index) => `
-    <article>
+  const core = payload.areas.filter((area) => area.role === "core");
+  const observational = payload.areas.filter((area) => area.role === "observational");
+  const appendix = payload.areas.filter((area) => area.role === "appendix");
+  const renderCard = (area, index, label) => `
+    <article class="${area.role}">
       <span style="--c:${palette[index % palette.length]}">${area.name}</span>
-      <strong>${score(area.score)}</strong>
+      <strong>${area.score === null || area.score === undefined ? label : score(area.score)}</strong>
       <p>${area.rationale}</p>
-      <small>${area.role === "core" ? "본지수" : area.role === "appendix" ? "부록" : "관측"} · 가중치 ${Math.round(area.weight * 100)}% · 변수 ${area.indicator_count}개</small>
+      <small>${label} · 가중치 ${Math.round(area.weight * 100)}% · 변수 ${area.indicator_count}개</small>
     </article>
-  `).join("");
+  `;
+  areaCards.innerHTML = `
+    <div class="card-group-title">본지수 KCI-D</div>
+    ${core.map((area, index) => renderCard(area, index, "본지수")).join("")}
+    <div class="card-group-title">관측·부록</div>
+    ${observational.map((area, index) => renderCard(area, index + core.length, "관측")).join("")}
+    ${appendix.map((area, index) => renderCard(area, index + core.length + observational.length, "부록")).join("")}
+  `;
 }
 
 function renderIndicatorTable() {
@@ -130,7 +140,7 @@ function drawAreaChart() {
   areaCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
   areaCtx.clearRect(0, 0, width, height);
 
-  const rows = payload.areas || [];
+  const rows = (payload.areas || []).filter((area) => area.role === "core");
   const padding = { top: 28, right: 24, bottom: 92, left: 48 };
   const chartW = width - padding.left - padding.right;
   const chartH = height - padding.top - padding.bottom;
@@ -159,15 +169,14 @@ function drawAreaChart() {
   rows.forEach((area, index) => {
     const lane = chartW / rows.length;
     const x = padding.left + lane * index + (lane - barW) / 2;
-    const hasScore = area.score !== null && area.score !== undefined;
-    const value = hasScore ? area.score : 0;
+    const value = area.score || 0;
     const barH = chartH * value / 100;
     const y = padding.top + chartH - barH;
-    areaCtx.fillStyle = hasScore ? palette[index % palette.length] : "#cfd6df";
-    areaCtx.fillRect(x, y, barW, Math.max(barH, hasScore ? 0 : 4));
+    areaCtx.fillStyle = palette[index % palette.length];
+    areaCtx.fillRect(x, y, barW, barH);
     areaCtx.fillStyle = "#17202a";
     areaCtx.font = "700 12px Segoe UI, sans-serif";
-    areaCtx.fillText(hasScore ? score(value) : "관측", x + barW / 2 - 16, y - 8);
+    areaCtx.fillText(score(value), x + barW / 2 - 16, y - 8);
     areaCtx.save();
     areaCtx.translate(x + barW / 2, padding.top + chartH + 18);
     areaCtx.rotate(-Math.PI / 6);

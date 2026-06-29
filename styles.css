@@ -350,6 +350,15 @@ nav a:hover {
   gap: 16px;
 }
 
+.card-group-title {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
 .area-cards article {
   display: grid;
   gap: 10px;
@@ -370,6 +379,18 @@ nav a:hover {
 .area-cards p {
   margin: 0;
   color: #405064;
+}
+
+.area-cards article.observational,
+.area-cards article.appendix {
+  background: #f8fafc;
+  box-shadow: none;
+}
+
+.area-cards article.observational strong,
+.area-cards article.appendix strong {
+  color: var(--muted);
+  font-size: 28px;
 }
 
 .indicator-table {

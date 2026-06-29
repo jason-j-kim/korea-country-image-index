@@ -413,59 +413,59 @@
       "source": "GDELT 2.1 DOC API, English-language global news query for South Korea/Korea",
       "status": "active",
       "latest_year": 2026,
-      "latest_value": 1277,
+      "latest_value": 1261,
       "score": null,
       "series": {
-        "2026": 1277
+        "2026": 1261
       },
       "live": {
         "ok": true,
         "source": "Google News RSS topic-basket fallback",
         "year": 2026,
-        "value": 1277,
-        "annualized_value": 15537,
+        "value": 1261,
+        "annualized_value": 15342,
         "window_days": 30,
         "query_count": 10,
         "edition_count": 6,
         "by_topic": {
-          "general_country": 251,
-          "government_politics": 114,
-          "democracy_society": 73,
-          "economy_technology": 62,
+          "general_country": 252,
+          "government_politics": 115,
+          "democracy_society": 74,
+          "economy_technology": 56,
           "diplomacy_security": 47,
-          "seoul_society": 182,
+          "seoul_society": 168,
           "policy_crisis": 9,
-          "hallyu_music": 233,
-          "hallyu_screen": 162,
+          "hallyu_music": 235,
+          "hallyu_screen": 161,
           "hallyu_lifestyle": 178
         },
         "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
         "sentiment_counts": {
-          "positive": 187,
-          "neutral": 991,
-          "negative": 99
+          "positive": 179,
+          "neutral": 982,
+          "negative": 100
         },
-        "positivity_index": 53.45,
-        "net_sentiment_index": 53.45,
+        "positivity_index": 53.13,
+        "net_sentiment_index": 53.13,
         "topic_sentiment": {
           "general_country": {
             "positive": 27,
-            "neutral": 198,
+            "neutral": 199,
             "negative": 26
           },
           "government_politics": {
             "positive": 7,
             "neutral": 67,
-            "negative": 40
+            "negative": 41
           },
           "democracy_society": {
             "positive": 5,
-            "neutral": 61,
+            "neutral": 62,
             "negative": 7
           },
           "economy_technology": {
-            "positive": 28,
-            "neutral": 32,
+            "positive": 26,
+            "neutral": 28,
             "negative": 2
           },
           "diplomacy_security": {
@@ -474,8 +474,8 @@
             "negative": 5
           },
           "seoul_society": {
-            "positive": 37,
-            "neutral": 132,
+            "positive": 30,
+            "neutral": 125,
             "negative": 13
           },
           "policy_crisis": {
@@ -484,13 +484,13 @@
             "negative": 4
           },
           "hallyu_music": {
-            "positive": 33,
-            "neutral": 198,
+            "positive": 34,
+            "neutral": 199,
             "negative": 2
           },
           "hallyu_screen": {
             "positive": 19,
-            "neutral": 139,
+            "neutral": 138,
             "negative": 4
           },
           "hallyu_lifestyle": {
@@ -673,15 +673,6 @@
             "sentiment": "neutral"
           },
           {
-            "title": "4 Takeaways From South Korea's Comeback Win Over Czechia In Group A - FOX Sports",
-            "description": "4 Takeaways From South Korea's Comeback Win Over Czechia In Group A FOX Sports",
-            "topics": [
-              "general_country"
-            ],
-            "source": "FOX Sports",
-            "sentiment": "positive"
-          },
-          {
             "title": "South Korea president calls for government investigation into World Cup exit as head coach resigns - The New York Times",
             "description": "South Korea president calls for government investigation into World Cup exit as head coach resigns The New York Times",
             "topics": [
@@ -690,6 +681,15 @@
             ],
             "source": "The New York Times",
             "sentiment": "negative"
+          },
+          {
+            "title": "4 Takeaways From South Korea's Comeback Win Over Czechia In Group A - FOX Sports",
+            "description": "4 Takeaways From South Korea's Comeback Win Over Czechia In Group A FOX Sports",
+            "topics": [
+              "general_country"
+            ],
+            "source": "FOX Sports",
+            "sentiment": "positive"
           },
           {
             "title": "No Bafana, no party! South Africa stun South Korea to advance to FIFA World Cup R32 - ESPN",
@@ -793,7 +793,29 @@
         ],
         "errors": [],
         "primary_error": "HTTP Error 429: Too Many Requests",
-        "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530230711&enddatetime=20260629230711"
+        "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530231345&enddatetime=20260629231345"
+      }
+    },
+    {
+      "id": "foreign_media_annualized",
+      "area": "foreign_media_digital",
+      "name": "외국 언론 한국 보도량 연환산 추정치",
+      "unit": "annualized articles",
+      "source": "Annualized estimate from the latest 30-day foreign media exposure sample.",
+      "status": "active",
+      "latest_year": 2026,
+      "latest_value": 15342,
+      "score": null,
+      "series": {
+        "2026": 15342
+      },
+      "live": {
+        "ok": true,
+        "year": 2026,
+        "value": 15342,
+        "base_30_day_value": 1261,
+        "window_days": 30,
+        "source": "Google News RSS topic-basket fallback"
       }
     },
     {
@@ -804,20 +826,20 @@
       "source": "Google News RSS headline/description lexicon sentiment. Observational until full article NLP is added.",
       "status": "active",
       "latest_year": 2026,
-      "latest_value": 53.45,
+      "latest_value": 53.13,
       "score": null,
       "series": {
-        "2026": 53.45
+        "2026": 53.13
       },
       "live": {
         "ok": true,
         "year": 2026,
-        "value": 53.45,
-        "net_sentiment_index": 53.45,
+        "value": 53.13,
+        "net_sentiment_index": 53.13,
         "sentiment_counts": {
-          "positive": 187,
-          "neutral": 991,
-          "negative": 99
+          "positive": 179,
+          "neutral": 982,
+          "negative": 100
         },
         "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
         "source": "Google News RSS topic-basket fallback"
@@ -1601,50 +1623,50 @@
       "ok": true,
       "source": "Google News RSS topic-basket fallback",
       "year": 2026,
-      "value": 1277,
-      "annualized_value": 15537,
+      "value": 1261,
+      "annualized_value": 15342,
       "window_days": 30,
       "query_count": 10,
       "edition_count": 6,
       "by_topic": {
-        "general_country": 251,
-        "government_politics": 114,
-        "democracy_society": 73,
-        "economy_technology": 62,
+        "general_country": 252,
+        "government_politics": 115,
+        "democracy_society": 74,
+        "economy_technology": 56,
         "diplomacy_security": 47,
-        "seoul_society": 182,
+        "seoul_society": 168,
         "policy_crisis": 9,
-        "hallyu_music": 233,
-        "hallyu_screen": 162,
+        "hallyu_music": 235,
+        "hallyu_screen": 161,
         "hallyu_lifestyle": 178
       },
       "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
       "sentiment_counts": {
-        "positive": 187,
-        "neutral": 991,
-        "negative": 99
+        "positive": 179,
+        "neutral": 982,
+        "negative": 100
       },
-      "positivity_index": 53.45,
-      "net_sentiment_index": 53.45,
+      "positivity_index": 53.13,
+      "net_sentiment_index": 53.13,
       "topic_sentiment": {
         "general_country": {
           "positive": 27,
-          "neutral": 198,
+          "neutral": 199,
           "negative": 26
         },
         "government_politics": {
           "positive": 7,
           "neutral": 67,
-          "negative": 40
+          "negative": 41
         },
         "democracy_society": {
           "positive": 5,
-          "neutral": 61,
+          "neutral": 62,
           "negative": 7
         },
         "economy_technology": {
-          "positive": 28,
-          "neutral": 32,
+          "positive": 26,
+          "neutral": 28,
           "negative": 2
         },
         "diplomacy_security": {
@@ -1653,8 +1675,8 @@
           "negative": 5
         },
         "seoul_society": {
-          "positive": 37,
-          "neutral": 132,
+          "positive": 30,
+          "neutral": 125,
           "negative": 13
         },
         "policy_crisis": {
@@ -1663,13 +1685,13 @@
           "negative": 4
         },
         "hallyu_music": {
-          "positive": 33,
-          "neutral": 198,
+          "positive": 34,
+          "neutral": 199,
           "negative": 2
         },
         "hallyu_screen": {
           "positive": 19,
-          "neutral": 139,
+          "neutral": 138,
           "negative": 4
         },
         "hallyu_lifestyle": {
@@ -1852,15 +1874,6 @@
           "sentiment": "neutral"
         },
         {
-          "title": "4 Takeaways From South Korea's Comeback Win Over Czechia In Group A - FOX Sports",
-          "description": "4 Takeaways From South Korea's Comeback Win Over Czechia In Group A FOX Sports",
-          "topics": [
-            "general_country"
-          ],
-          "source": "FOX Sports",
-          "sentiment": "positive"
-        },
-        {
           "title": "South Korea president calls for government investigation into World Cup exit as head coach resigns - The New York Times",
           "description": "South Korea president calls for government investigation into World Cup exit as head coach resigns The New York Times",
           "topics": [
@@ -1869,6 +1882,15 @@
           ],
           "source": "The New York Times",
           "sentiment": "negative"
+        },
+        {
+          "title": "4 Takeaways From South Korea's Comeback Win Over Czechia In Group A - FOX Sports",
+          "description": "4 Takeaways From South Korea's Comeback Win Over Czechia In Group A FOX Sports",
+          "topics": [
+            "general_country"
+          ],
+          "source": "FOX Sports",
+          "sentiment": "positive"
         },
         {
           "title": "No Bafana, no party! South Africa stun South Korea to advance to FIFA World Cup R32 - ESPN",
@@ -1972,17 +1994,25 @@
       ],
       "errors": [],
       "primary_error": "HTTP Error 429: Too Many Requests",
-      "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530230711&enddatetime=20260629230711"
+      "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530231345&enddatetime=20260629231345"
+    },
+    "foreign_media_annualized": {
+      "ok": true,
+      "year": 2026,
+      "value": 15342,
+      "base_30_day_value": 1261,
+      "window_days": 30,
+      "source": "Google News RSS topic-basket fallback"
     },
     "foreign_media_positivity": {
       "ok": true,
       "year": 2026,
-      "value": 53.45,
-      "net_sentiment_index": 53.45,
+      "value": 53.13,
+      "net_sentiment_index": 53.13,
       "sentiment_counts": {
-        "positive": 187,
-        "neutral": 991,
-        "negative": 99
+        "positive": 179,
+        "neutral": 982,
+        "negative": 100
       },
       "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
       "source": "Google News RSS topic-basket fallback"

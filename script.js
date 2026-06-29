@@ -16,7 +16,7 @@ const mediaValue = document.querySelector("#mediaValue");
 const mediaSource = document.querySelector("#mediaSource");
 const mediaMethod = document.querySelector("#mediaMethod");
 const mediaPositive = document.querySelector("#mediaPositive");
-const mediaAnnualized = document.querySelector("#mediaAnnualized");
+const mediaThirtyDay = document.querySelector("#mediaThirtyDay");
 
 const palette = ["#1d5fd1", "#008c88", "#d8426b", "#7655c7", "#3b8b4f", "#c48722"];
 let payload = null;
@@ -65,11 +65,12 @@ function renderHeadline() {
 
   const media = payload.indicators.find((item) => item.id === "foreign_media_coverage");
   const positive = payload.indicators.find((item) => item.id === "foreign_media_positivity");
-  mediaCount.textContent = format(media?.latest_value, 0);
-  mediaValue.textContent = format(media?.latest_value, 0);
-  if (mediaPositive) mediaPositive.textContent = `${score(positive?.latest_value)}`;
   const live = payload.live_collection?.foreign_media_coverage;
-  if (mediaAnnualized) mediaAnnualized.textContent = format(live?.annualized_value, 0);
+  const annualized = live?.annualized_value ?? media?.latest_value;
+  mediaCount.textContent = format(annualized, 0);
+  mediaValue.textContent = format(annualized, 0);
+  if (mediaThirtyDay) mediaThirtyDay.textContent = format(media?.latest_value, 0);
+  if (mediaPositive) mediaPositive.textContent = `${score(positive?.latest_value)}`;
   if (live?.source) {
     const scope = live.query_count && live.edition_count
       ? ` · ${live.query_count}개 주제 × ${live.edition_count}개 영어권 판본`

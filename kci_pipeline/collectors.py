@@ -255,8 +255,17 @@ def collect_live_sources() -> dict:
         "sentiment_method": media.get("sentiment_method"),
         "source": media.get("source"),
     }
+    annualized = {
+        "ok": media.get("ok", False),
+        "year": media.get("year"),
+        "value": media.get("annualized_value"),
+        "base_30_day_value": media.get("value"),
+        "window_days": media.get("window_days"),
+        "source": media.get("source"),
+    }
     return {
         "foreign_media_coverage": media,
+        "foreign_media_annualized": annualized,
         "foreign_media_positivity": positivity,
         "wikimedia_pageviews": collect_wikimedia_pageviews(),
         "fdi_inflow_usd_m": collect_worldbank_fdi(),

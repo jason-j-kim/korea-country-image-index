@@ -158,6 +158,15 @@ INDICATORS = {
         "source": "GDELT 2.1 DOC API, English-language global news query for South Korea/Korea",
         "series": {},
     },
+    "foreign_media_annualized": {
+        "area": "foreign_media_digital",
+        "name": "외국 언론 한국 보도량 연환산 추정치",
+        "unit": "annualized articles",
+        "direction": "positive",
+        "score_included": False,
+        "source": "Annualized estimate from the latest 30-day foreign media exposure sample.",
+        "series": {},
+    },
     "foreign_media_positivity": {
         "area": "foreign_media_digital",
         "name": "외국 언론 한국 보도 긍정지수",

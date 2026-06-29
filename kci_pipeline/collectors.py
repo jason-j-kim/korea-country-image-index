@@ -93,10 +93,12 @@ def collect_gdelt_foreign_media(days: int = 30) -> dict:
         payload = _get_json(url)
         rows = payload.get("timeline", {}).get("data", [])
         total = sum(int(row.get("value", 0)) for row in rows)
+        annualized = round(total * 365 / days)
         return {
             "ok": True,
             "year": now.year,
             "value": total,
+            "annualized_value": annualized,
             "window_days": days,
             "url": url,
         }
@@ -171,6 +173,7 @@ def collect_google_news_foreign_media(days: int = 30) -> dict:
         for topic in article["topics"]:
             topic_sentiment[topic][label] += 1
     total = max(len(articles), 1)
+    annualized = round(len(links) * 365 / days) if links else None
     positivity_index = round((sentiment_counts["positive"] + 0.5 * sentiment_counts["neutral"]) / total * 100, 2)
     net_sentiment_index = round(50 + 50 * (sentiment_counts["positive"] - sentiment_counts["negative"]) / total, 2)
     return {
@@ -178,6 +181,7 @@ def collect_google_news_foreign_media(days: int = 30) -> dict:
         "source": "Google News RSS topic-basket fallback",
         "year": datetime.now(timezone.utc).year,
         "value": len(links) if links else None,
+        "annualized_value": annualized,
         "window_days": days,
         "query_count": len(FOREIGN_MEDIA_QUERY_GROUPS),
         "edition_count": len(editions),

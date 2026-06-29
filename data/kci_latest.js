@@ -413,58 +413,59 @@ window.KCI_LATEST = {
       "source": "GDELT 2.1 DOC API, English-language global news query for South Korea/Korea",
       "status": "active",
       "latest_year": 2026,
-      "latest_value": 1301,
+      "latest_value": 1277,
       "score": null,
       "series": {
-        "2026": 1301
+        "2026": 1277
       },
       "live": {
         "ok": true,
         "source": "Google News RSS topic-basket fallback",
         "year": 2026,
-        "value": 1301,
+        "value": 1277,
+        "annualized_value": 15537,
         "window_days": 30,
         "query_count": 10,
         "edition_count": 6,
         "by_topic": {
-          "general_country": 252,
-          "government_politics": 116,
-          "democracy_society": 74,
-          "economy_technology": 56,
+          "general_country": 251,
+          "government_politics": 114,
+          "democracy_society": 73,
+          "economy_technology": 62,
           "diplomacy_security": 47,
-          "seoul_society": 170,
+          "seoul_society": 182,
           "policy_crisis": 9,
-          "hallyu_music": 234,
-          "hallyu_screen": 199,
-          "hallyu_lifestyle": 177
+          "hallyu_music": 233,
+          "hallyu_screen": 162,
+          "hallyu_lifestyle": 178
         },
         "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
         "sentiment_counts": {
-          "positive": 182,
-          "neutral": 1019,
-          "negative": 100
+          "positive": 187,
+          "neutral": 991,
+          "negative": 99
         },
-        "positivity_index": 53.15,
-        "net_sentiment_index": 53.15,
+        "positivity_index": 53.45,
+        "net_sentiment_index": 53.45,
         "topic_sentiment": {
           "general_country": {
             "positive": 27,
-            "neutral": 200,
-            "negative": 25
+            "neutral": 198,
+            "negative": 26
           },
           "government_politics": {
             "positive": 7,
-            "neutral": 68,
-            "negative": 41
+            "neutral": 67,
+            "negative": 40
           },
           "democracy_society": {
-            "positive": 6,
+            "positive": 5,
             "neutral": 61,
             "negative": 7
           },
           "economy_technology": {
-            "positive": 26,
-            "neutral": 28,
+            "positive": 28,
+            "neutral": 32,
             "negative": 2
           },
           "diplomacy_security": {
@@ -473,9 +474,9 @@ window.KCI_LATEST = {
             "negative": 5
           },
           "seoul_society": {
-            "positive": 30,
-            "neutral": 126,
-            "negative": 14
+            "positive": 37,
+            "neutral": 132,
+            "negative": 13
           },
           "policy_crisis": {
             "positive": 1,
@@ -483,18 +484,18 @@ window.KCI_LATEST = {
             "negative": 4
           },
           "hallyu_music": {
-            "positive": 34,
+            "positive": 33,
             "neutral": 198,
             "negative": 2
           },
           "hallyu_screen": {
-            "positive": 21,
-            "neutral": 174,
+            "positive": 19,
+            "neutral": 139,
             "negative": 4
           },
           "hallyu_lifestyle": {
             "positive": 26,
-            "neutral": 147,
+            "neutral": 148,
             "negative": 4
           }
         },
@@ -792,7 +793,7 @@ window.KCI_LATEST = {
         ],
         "errors": [],
         "primary_error": "HTTP Error 429: Too Many Requests",
-        "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530225934&enddatetime=20260629225934"
+        "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530230711&enddatetime=20260629230711"
       }
     },
     {
@@ -803,20 +804,20 @@ window.KCI_LATEST = {
       "source": "Google News RSS headline/description lexicon sentiment. Observational until full article NLP is added.",
       "status": "active",
       "latest_year": 2026,
-      "latest_value": 53.15,
+      "latest_value": 53.45,
       "score": null,
       "series": {
-        "2026": 53.15
+        "2026": 53.45
       },
       "live": {
         "ok": true,
         "year": 2026,
-        "value": 53.15,
-        "net_sentiment_index": 53.15,
+        "value": 53.45,
+        "net_sentiment_index": 53.45,
         "sentiment_counts": {
-          "positive": 182,
-          "neutral": 1019,
-          "negative": 100
+          "positive": 187,
+          "neutral": 991,
+          "negative": 99
         },
         "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
         "source": "Google News RSS topic-basket fallback"
@@ -1600,49 +1601,50 @@ window.KCI_LATEST = {
       "ok": true,
       "source": "Google News RSS topic-basket fallback",
       "year": 2026,
-      "value": 1301,
+      "value": 1277,
+      "annualized_value": 15537,
       "window_days": 30,
       "query_count": 10,
       "edition_count": 6,
       "by_topic": {
-        "general_country": 252,
-        "government_politics": 116,
-        "democracy_society": 74,
-        "economy_technology": 56,
+        "general_country": 251,
+        "government_politics": 114,
+        "democracy_society": 73,
+        "economy_technology": 62,
         "diplomacy_security": 47,
-        "seoul_society": 170,
+        "seoul_society": 182,
         "policy_crisis": 9,
-        "hallyu_music": 234,
-        "hallyu_screen": 199,
-        "hallyu_lifestyle": 177
+        "hallyu_music": 233,
+        "hallyu_screen": 162,
+        "hallyu_lifestyle": 178
       },
       "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
       "sentiment_counts": {
-        "positive": 182,
-        "neutral": 1019,
-        "negative": 100
+        "positive": 187,
+        "neutral": 991,
+        "negative": 99
       },
-      "positivity_index": 53.15,
-      "net_sentiment_index": 53.15,
+      "positivity_index": 53.45,
+      "net_sentiment_index": 53.45,
       "topic_sentiment": {
         "general_country": {
           "positive": 27,
-          "neutral": 200,
-          "negative": 25
+          "neutral": 198,
+          "negative": 26
         },
         "government_politics": {
           "positive": 7,
-          "neutral": 68,
-          "negative": 41
+          "neutral": 67,
+          "negative": 40
         },
         "democracy_society": {
-          "positive": 6,
+          "positive": 5,
           "neutral": 61,
           "negative": 7
         },
         "economy_technology": {
-          "positive": 26,
-          "neutral": 28,
+          "positive": 28,
+          "neutral": 32,
           "negative": 2
         },
         "diplomacy_security": {
@@ -1651,9 +1653,9 @@ window.KCI_LATEST = {
           "negative": 5
         },
         "seoul_society": {
-          "positive": 30,
-          "neutral": 126,
-          "negative": 14
+          "positive": 37,
+          "neutral": 132,
+          "negative": 13
         },
         "policy_crisis": {
           "positive": 1,
@@ -1661,18 +1663,18 @@ window.KCI_LATEST = {
           "negative": 4
         },
         "hallyu_music": {
-          "positive": 34,
+          "positive": 33,
           "neutral": 198,
           "negative": 2
         },
         "hallyu_screen": {
-          "positive": 21,
-          "neutral": 174,
+          "positive": 19,
+          "neutral": 139,
           "negative": 4
         },
         "hallyu_lifestyle": {
           "positive": 26,
-          "neutral": 147,
+          "neutral": 148,
           "negative": 4
         }
       },
@@ -1970,17 +1972,17 @@ window.KCI_LATEST = {
       ],
       "errors": [],
       "primary_error": "HTTP Error 429: Too Many Requests",
-      "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530225934&enddatetime=20260629225934"
+      "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530230711&enddatetime=20260629230711"
     },
     "foreign_media_positivity": {
       "ok": true,
       "year": 2026,
-      "value": 53.15,
-      "net_sentiment_index": 53.15,
+      "value": 53.45,
+      "net_sentiment_index": 53.45,
       "sentiment_counts": {
-        "positive": 182,
-        "neutral": 1019,
-        "negative": 100
+        "positive": 187,
+        "neutral": 991,
+        "negative": 99
       },
       "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
       "source": "Google News RSS topic-basket fallback"

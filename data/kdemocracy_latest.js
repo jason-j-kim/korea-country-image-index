@@ -57,9 +57,31 @@ window.KDEMOCRACY_LATEST = {
     {"country": "Brazil", "group": "G20", "score": 61.2, "rank": 17, "status": "취약권"},
     {"country": "India", "group": "G20", "score": 54.8, "rank": 18, "status": "취약권"}
   ],
+  "power_alternation": {
+    "name": "정권교체지수",
+    "window": "1995-2026",
+    "method": "선거 또는 헌정 절차를 통해 집권 정당/블록이 반대 진영으로 교체된 횟수를 집계하고, 5회 이상을 100점으로 정규화한다.",
+    "formula": "score = min(100, alternations / 5 * 100)",
+    "interpretation": "높을수록 유권자가 집권세력을 실제로 교체할 수 있었던 경험이 많다는 뜻이다. 단, 잦은 교체가 항상 정책 안정성을 뜻하지는 않으므로 기존 민주주의 지표의 보완축으로 사용한다.",
+    "comparison": [
+      {"country": "South Korea", "alternations": 5, "score": 100, "events": "1998, 2008, 2017, 2022, 2025", "note": "보수-진보 진영 간 대통령 권력 교체가 반복됨"},
+      {"country": "Italy", "alternations": 5, "score": 100, "events": "1996, 2001, 2006, 2008, 2013+", "note": "연립정부 교체가 잦아 유동성이 높음"},
+      {"country": "Australia", "alternations": 4, "score": 80, "events": "1996, 2007, 2013, 2022", "note": "양대 정당 경쟁에 따른 주기적 교체"},
+      {"country": "United States", "alternations": 4, "score": 80, "events": "2001, 2009, 2017, 2021", "note": "대통령제 양당 경쟁의 교체성 높음"},
+      {"country": "Germany", "alternations": 3, "score": 60, "events": "1998, 2005, 2021", "note": "연립 형태는 바뀌지만 총리 소속 블록 기준 교체"},
+      {"country": "Taiwan", "alternations": 3, "score": 60, "events": "2000, 2008, 2016", "note": "민주화 이후 양대 진영 교체"},
+      {"country": "United Kingdom", "alternations": 3, "score": 60, "events": "1997, 2010, 2024", "note": "하원 다수 기반의 집권당 교체"},
+      {"country": "Brazil", "alternations": 3, "score": 60, "events": "2003, 2016, 2023", "note": "대통령 진영 교체와 탄핵 이후 승계 포함"},
+      {"country": "France", "alternations": 2, "score": 40, "events": "2012, 2017", "note": "대통령 소속 정치 블록 기준"},
+      {"country": "Japan", "alternations": 2, "score": 40, "events": "2009, 2012", "note": "민주주의 제도는 안정적이나 LDP 장기 우위가 강함"},
+      {"country": "Canada", "alternations": 2, "score": 40, "events": "2006, 2015", "note": "자유당-보수당 간 교체"},
+      {"country": "Mexico", "alternations": 2, "score": 40, "events": "2000, 2018", "note": "PRI 장기지배 종료 이후 대형 교체 발생"}
+    ]
+  },
   "notes": [
     "한국 시계열은 2018-2026년 동일 가중치로 산출한다.",
     "국제비교는 현재 공개된 최신 연도 지표를 같은 0-100 스케일로 맞춘 파일럿 비교표다.",
+    "정권교체지수는 민주주의의 경쟁성과 권력교체 경험을 보완적으로 보여주는 별도 그래프다.",
     "다음 단계에서는 각 원자료 CSV/API를 국가별로 자동 수집해 파일럿 값을 대체한다."
   ],
   "source_links": [

@@ -18,6 +18,7 @@
     <nav aria-label="K민주주의 주요 섹션">
       <a href="#korea">한국 시계열</a>
       <a href="#global">국제비교</a>
+      <a href="#alternation">정권교체</a>
       <a href="#components">구성지표</a>
     </nav>
   </header>
@@ -92,6 +93,26 @@
         </div>
         <canvas id="kdG20Chart" width="900" height="420" aria-label="G20 표본 K민주주의 순위 비교"></canvas>
       </article>
+    </section>
+
+    <section class="section kd-alternation" id="alternation">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Power Alternation</p>
+          <h2>정권교체지수</h2>
+        </div>
+        <small>1995-2026 · 5회 이상 100점</small>
+      </div>
+      <div class="kd-alternation-layout">
+        <article class="kd-chart-panel">
+          <canvas id="kdAlternationChart" width="900" height="440" aria-label="국가별 정권교체지수 비교"></canvas>
+        </article>
+        <article class="kd-note">
+          <h3>왜 별도 지표인가</h3>
+          <p id="kdAlternationNote"></p>
+          <div id="kdAlternationList" class="kd-event-list"></div>
+        </article>
+      </div>
     </section>
 
     <section class="section" id="components">

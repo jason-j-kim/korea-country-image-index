@@ -164,6 +164,68 @@ function drawG20Chart() {
   ctx.textAlign = "left";
 }
 
+function drawAlternationChart() {
+  const canvas = document.querySelector("#kdAlternationChart");
+  const { ctx, width, height } = setupCanvas(canvas);
+  const rows = kdData.power_alternation.comparison.slice().sort((a, b) => b.score - a.score);
+  const padding = { top: 26, right: 38, bottom: 100, left: 50 };
+  const chartW = width - padding.left - padding.right;
+  const chartH = height - padding.top - padding.bottom;
+  const lane = chartW / Math.max(rows.length, 1);
+  const barW = lane * 0.58;
+
+  ctx.strokeStyle = "#d9e0e8";
+  ctx.lineWidth = 1;
+  ctx.font = "12px Segoe UI, sans-serif";
+  ctx.fillStyle = "#657080";
+  for (let i = 0; i <= 4; i += 1) {
+    const value = i * 25;
+    const y = padding.top + chartH - (chartH * value) / 100;
+    ctx.beginPath();
+    ctx.moveTo(padding.left, y);
+    ctx.lineTo(padding.left + chartW, y);
+    ctx.stroke();
+    ctx.fillText(String(value), 14, y + 4);
+  }
+
+  rows.forEach((row, index) => {
+    const x = padding.left + lane * index + (lane - barW) / 2;
+    const barH = (chartH * row.score) / 100;
+    const y = padding.top + chartH - barH;
+    const isKorea = row.country === "South Korea";
+    const isJapan = row.country === "Japan";
+    ctx.fillStyle = isKorea ? "#d8426b" : isJapan ? "#c48722" : kdPalette[index % kdPalette.length];
+    ctx.fillRect(x, y, barW, barH);
+    ctx.fillStyle = "#17202a";
+    ctx.font = `${isKorea || isJapan ? "800" : "700"} 12px Segoe UI, sans-serif`;
+    ctx.textAlign = "center";
+    ctx.fillText(`${row.alternations}회`, x + barW / 2, y - 22);
+    ctx.fillText(kdScore(row.score), x + barW / 2, y - 7);
+    ctx.save();
+    ctx.translate(x + barW / 2, padding.top + chartH + 18);
+    ctx.rotate(-Math.PI / 5);
+    ctx.textAlign = "right";
+    ctx.fillStyle = isKorea ? "#d8426b" : isJapan ? "#c48722" : "#405064";
+    ctx.fillText(row.country, 0, 0);
+    ctx.restore();
+  });
+  ctx.textAlign = "left";
+}
+
+function renderAlternation() {
+  const korea = kdData.power_alternation.comparison.find((row) => row.country === "South Korea");
+  const japan = kdData.power_alternation.comparison.find((row) => row.country === "Japan");
+  document.querySelector("#kdAlternationNote").textContent =
+    `${kdData.power_alternation.interpretation} 한국은 ${korea.events}의 ${korea.alternations}회 교체로 ${korea.score}점, 일본은 ${japan.events}의 ${japan.alternations}회 교체로 ${japan.score}점입니다.`;
+  document.querySelector("#kdAlternationList").innerHTML = [korea, japan].map((row) => `
+    <div>
+      <b>${row.country}</b>
+      <span>${row.events}</span>
+      <small>${row.note}</small>
+    </div>
+  `).join("");
+}
+
 function renderRanking() {
   const rows = kdData.international_comparison.map((row) => `
     <div class="${row.country === "South Korea" ? "is-korea" : ""}">
@@ -194,15 +256,18 @@ function renderAll() {
   renderHeadline();
   renderRanking();
   renderComponents();
+  renderAlternation();
   drawHistoryChart();
   drawGlobalChart();
   drawG20Chart();
+  drawAlternationChart();
 }
 
 window.addEventListener("resize", () => {
   drawHistoryChart();
   drawGlobalChart();
   drawG20Chart();
+  drawAlternationChart();
 });
 
 renderAll();

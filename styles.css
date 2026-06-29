@@ -607,7 +607,8 @@ footer p {
 
 #kdHistoryChart,
 #kdGlobalChart,
-#kdG20Chart {
+#kdG20Chart,
+#kdAlternationChart {
   width: 100%;
   min-height: 360px;
 }
@@ -622,6 +623,48 @@ footer p {
 
 #kdG20Chart {
   min-height: 420px;
+}
+
+.kd-alternation {
+  background: #ffffff;
+}
+
+.kd-alternation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: 18px;
+}
+
+#kdAlternationChart {
+  min-height: 440px;
+}
+
+.kd-event-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.kd-event-list div {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+  border: 1px solid #edf1f5;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.kd-event-list b {
+  color: var(--blue);
+}
+
+.kd-event-list span {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.kd-event-list small {
+  color: var(--muted);
 }
 
 .kd-global-layout {
@@ -742,7 +785,8 @@ footer p {
   .warning,
   .dashboard-grid,
   .kd-hero,
-  .kd-global-layout {
+  .kd-global-layout,
+  .kd-alternation-layout {
     grid-template-columns: 1fr;
   }
 

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KCI | 한국 국가이미지 지수</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#overview" aria-label="KCI 홈">
+      <span class="brand-mark">K</span>
+      <span>
+        <strong>KCI</strong>
+        <small>Korea Country Image Index</small>
+      </span>
+    </a>
+    <nav aria-label="주요 섹션">
+      <a href="#dashboard">대시보드</a>
+      <a href="#variables">변수</a>
+      <a href="#media">외국 언론</a>
+      <a href="#method">산식</a>
+      <a href="#pipeline">수집</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="overview">
+      <div class="hero-copy">
+        <p class="eyebrow">Country image, not Hallyu</p>
+        <h1>한국이라는 국가 자체가 얼마나 선택되고, 탐색되고, 신뢰되는가.</h1>
+        <p>
+          KCI는 K-pop, 드라마, 뷰티, 게임 같은 한류 콘텐츠 변수를 제외하고
+          언어·교육, 지식·혁신, 의료서비스, 투자, 민주주의·거버넌스, 외국 언론 보도량, 정보수요를 결합한
+          한국 국가이미지 행동지수입니다.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#dashboard">현재 지수 보기</a>
+          <a class="button secondary" href="#variables">변수 체계 보기</a>
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <div class="score-card">
+          <span>Current KCI</span>
+          <strong id="heroKci">--</strong>
+          <small id="heroDate">data/kci_latest.json</small>
+        </div>
+        <div class="press-visual" aria-label="외국 언론 보도량 시각 요소">
+          <span>Foreign press</span>
+          <b id="mediaCount">--</b>
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section warning">
+      <div>
+        <p class="eyebrow">Reset Rule</p>
+        <h2>기존 한류 지수 변수는 사용하지 않습니다.</h2>
+      </div>
+      <p>
+        제외: K-pop, K영상, K게임, K웹툰, K패션, K뷰티, K관광, YouTube 조회수,
+        Reddit 반응, KF 한류현황 API, K-Food 수출액. 음식 변수는 수출액이 아니라
+        해외 식당 방문·인지·만족 같은 생활문화 서비스 소비만 보조적으로 사용합니다.
+      </p>
+    </section>
+
+    <section class="section dashboard" id="dashboard">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Live Dashboard</p>
+          <h2>한국 국가이미지 지수</h2>
+        </div>
+        <small id="dataStatus">데이터 로딩 중</small>
+      </div>
+      <div class="dashboard-grid">
+        <article class="index-meter">
+          <span>종합 KCI</span>
+          <strong id="kciValue">--</strong>
+          <small id="kciSub">가중평균</small>
+        </article>
+        <canvas id="areaChart" width="900" height="420" aria-label="영역별 KCI 점수 막대그래프"></canvas>
+        <article class="history-panel">
+          <div class="panel-head">
+            <h3>5년 변화</h3>
+            <small>2021-2026, 연도별 최신값 보간</small>
+          </div>
+          <canvas id="historyChart" width="900" height="320" aria-label="KCI 5년 변화 선그래프"></canvas>
+          <div id="historySummary" class="summary-grid"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="variables">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Variable System</p>
+          <h2>7개 영역, 행동 수요와 제도 신뢰 기반 변수</h2>
+        </div>
+      </div>
+      <div id="areaCards" class="area-cards"></div>
+      <div id="indicatorTable" class="indicator-table"></div>
+    </section>
+
+    <section class="section media" id="media">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Foreign Media Variable</p>
+          <h2>외국 언론의 한국 보도량</h2>
+        </div>
+      </div>
+      <div class="media-layout">
+        <article>
+          <h3>왜 필요한가</h3>
+          <p>
+            국가이미지는 콘텐츠 소비만으로 설명되지 않습니다. 외국 언론이 한국을 얼마나 자주
+            보도하는지는 외교, 안보, 경제, 기술, 사회 이슈를 포함한 국가 단위 가시성을 보여주는
+            선행지표입니다.
+          </p>
+        </article>
+        <article>
+          <h3>현재 수집 방식</h3>
+          <p id="mediaMethod">
+            GDELT 2.1 DOC API를 우선 사용하고, 호출 제한이 걸리면 Google News RSS 영어권 판의
+            한국 총노출 주제 바스켓을 수집합니다. 일반 한국, 정부·정치, 민주주의, 경제·기술,
+            외교·안보, 서울·사회, 정책·위기에 K-pop, K드라마, 영화, K뷰티, K푸드 같은 한류 노출까지
+            합산하고 중복 링크를 제거합니다. 단, 보도량은
+            긍정·부정이 섞이는 노출 변수이므로 감성 분석 전까지 종합 KCI 점수에는 넣지 않습니다.
+          </p>
+        </article>
+        <article>
+          <h3>현재 값</h3>
+          <strong id="mediaValue">--</strong>
+          <p class="metric-line">긍정지수 <b id="mediaPositive">--</b></p>
+          <small id="mediaSource">수집 대기</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="section method" id="method">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Method</p>
+          <h2>산식과 해석</h2>
+        </div>
+      </div>
+      <div class="method-grid">
+        <article>
+          <span>1</span>
+          <h3>한류 변수 제거</h3>
+          <p>콘텐츠 장르, 팬덤 플랫폼, 한류현황 API, K-Food 수출액은 계산에서 제외합니다.</p>
+        </article>
+        <article>
+          <span>2</span>
+          <h3>행동 수요 변수화</h3>
+          <p>응시, 유학, 특허, 진료, 투자, 보도, 정보조회처럼 실제 행동으로 관측되는 숫자를 씁니다.</p>
+        </article>
+        <article>
+          <span>3</span>
+          <h3>0-100 정규화</h3>
+          <p>시계열 최저·최고값으로 정규화하고, 순위형 변수는 역점수로 변환합니다.</p>
+        </article>
+        <article>
+          <span>4</span>
+          <h3>영역 가중평균</h3>
+          <p>언어·교육 18%, 지식·혁신 15%, 의료 12%, 투자 12%, 언론·정보 15%, 민주주의 20%, 생활서비스 8%. 벤치마크 없는 국내 시계열 최고값은 95점으로 제한합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section pipeline" id="pipeline">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Automation</p>
+          <h2>새 통계 수집 파이프라인</h2>
+        </div>
+      </div>
+      <div class="pipeline-track">
+        <div><b>문서 기반 연간값</b><span>TOPIK, 세종학당, 유학생, PCT, GII, 의료관광, 민주주의</span></div>
+        <div><b>공개 API</b><span>Wikimedia, World Bank, GDELT 또는 Google News RSS</span></div>
+        <div><b>산출</b><span>data/kci_latest.json, data/kci_latest.js</span></div>
+        <div><b>갱신</b><span>python -m kci_pipeline.run_kci</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Basis: kci_behavioral_indicators.docx</p>
+    <p>KCI excludes Hallyu-content variables by design.</p>
+  </footer>
+
+  <script src="data/kci_latest.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+
+# Local logs and generated historical runs
+server.err.log
+server.out.log
+data/logs/
+data/raw/
+data/output/
+data/kci_output/
+
+# Legacy K-wave prototype artifacts not used by the current KCI site
+kwci_pipeline/
+data/kwci_latest.json
+data/kwci_latest.js
+run_kwci_daily.ps1
+install_kwci_task.ps1
+reddit_playwright_scraper.py
+playwright_scraping_requirements.txt
+
+# Source documents and reports kept local
+*.docx
+*.pdf

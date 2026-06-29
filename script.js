@@ -87,7 +87,7 @@ function renderAreaCards() {
       <span style="--c:${palette[index % palette.length]}">${area.name}</span>
       <strong>${score(area.score)}</strong>
       <p>${area.rationale}</p>
-      <small>가중치 ${Math.round(area.weight * 100)}% · 변수 ${area.indicator_count}개</small>
+      <small>${area.role === "core" ? "본지수" : area.role === "appendix" ? "부록" : "관측"} · 가중치 ${Math.round(area.weight * 100)}% · 변수 ${area.indicator_count}개</small>
     </article>
   `).join("");
 }

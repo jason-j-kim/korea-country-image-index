@@ -12,7 +12,7 @@
       <span class="brand-mark">K</span>
       <span>
         <strong>KCI</strong>
-        <small>Korea Country Image Index</small>
+        <small>KCI-D / KCI-G</small>
       </span>
     </a>
     <nav aria-label="주요 섹션">
@@ -30,9 +30,9 @@
         <p class="eyebrow">Country image, not Hallyu</p>
         <h1>한국이라는 국가 자체가 얼마나 선택되고, 탐색되고, 신뢰되는가.</h1>
         <p>
-          KCI는 K-pop, 드라마, 뷰티, 게임 같은 한류 콘텐츠 변수를 제외하고
-          언어·교육, 지식·혁신, 의료서비스, 투자, 민주주의·거버넌스, 외국 언론 보도량, 정보수요를 결합한
-          한국 국가이미지 행동지수입니다.
+          KCI는 두 지수로 분리됩니다. KCI-D는 한국 내부 시계열 국가이미지 지수이고,
+          KCI-G는 OECD, G20, 주요 30개국 비교를 위한 국제비교 프레임워크입니다.
+          생활문화 서비스 소비는 본지수가 아니라 부록 지표로 둡니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="#dashboard">현재 지수 보기</a>
@@ -41,7 +41,7 @@
       </div>
       <aside class="hero-panel">
         <div class="score-card">
-          <span>Current KCI</span>
+          <span>Current KCI-D</span>
           <strong id="heroKci">--</strong>
           <small id="heroDate">data/kci_latest.json</small>
         </div>
@@ -61,7 +61,7 @@
       <p>
         제외: K-pop, K영상, K게임, K웹툰, K패션, K뷰티, K관광, YouTube 조회수,
         Reddit 반응, KF 한류현황 API, K-Food 수출액. 음식 변수는 수출액이 아니라
-        해외 식당 방문·인지·만족 같은 생활문화 서비스 소비만 보조적으로 사용합니다.
+        해외 식당 방문·인지·만족 같은 생활문화 서비스 소비는 본지수에서 제외하고 부록으로만 표시합니다.
       </p>
     </section>
 
@@ -69,13 +69,13 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">Live Dashboard</p>
-          <h2>한국 국가이미지 지수</h2>
+          <h2>한국 국가이미지 지수 KCI-D</h2>
         </div>
         <small id="dataStatus">데이터 로딩 중</small>
       </div>
       <div class="dashboard-grid">
         <article class="index-meter">
-          <span>종합 KCI</span>
+          <span>종합 KCI-D</span>
           <strong id="kciValue">--</strong>
           <small id="kciSub">가중평균</small>
         </article>
@@ -95,7 +95,7 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">Variable System</p>
-          <h2>7개 영역, 행동 수요와 제도 신뢰 기반 변수</h2>
+          <h2>본지수 5개 영역, 관측·부록 영역 분리</h2>
         </div>
       </div>
       <div id="areaCards" class="area-cards"></div>
@@ -163,7 +163,7 @@
         <article>
           <span>4</span>
           <h3>영역 가중평균</h3>
-          <p>언어·교육 18%, 지식·혁신 15%, 의료 12%, 투자 12%, 언론·정보 15%, 민주주의 20%, 생활서비스 8%. 벤치마크 없는 국내 시계열 최고값은 95점으로 제한합니다.</p>
+          <p>본지수 KCI-D는 언어·교육 20%, 지식·혁신 18%, 의료 14%, 투자 14%, 민주주의 34%입니다. 외국언론은 관측 영역, 생활문화는 부록 영역입니다.</p>
         </article>
       </div>
     </section>
@@ -178,7 +178,7 @@
       <div class="pipeline-track">
         <div><b>문서 기반 연간값</b><span>TOPIK, 세종학당, 유학생, PCT, GII, 의료관광, 민주주의</span></div>
         <div><b>공개 API</b><span>Wikimedia, World Bank, GDELT 또는 Google News RSS</span></div>
-        <div><b>산출</b><span>data/kci_latest.json, data/kci_latest.js</span></div>
+        <div><b>산출</b><span>KCI-D, KDI, KCI-G JSON/JS</span></div>
         <div><b>갱신</b><span>python -m kci_pipeline.run_kci</span></div>
       </div>
     </section>

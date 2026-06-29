@@ -9,37 +9,44 @@ OUTPUT_DIR = DATA_DIR / "kci_output"
 AREAS = {
     "language_education": {
         "name": "언어·교육 수요",
-        "weight": 0.18,
+        "weight": 0.20,
+        "role": "core",
         "rationale": "한국어 학습, 한국 유학, 한국학 개설처럼 시간과 비용을 투입하는 국가 선택 행동.",
     },
     "knowledge_innovation": {
         "name": "지식·혁신 역량",
-        "weight": 0.15,
+        "weight": 0.18,
+        "role": "core",
         "rationale": "특허, 연구 기여도, 혁신 순위로 나타나는 한국 지식생산 생태계의 국제적 위치.",
     },
     "medical_services": {
         "name": "의료·전문 서비스 신뢰",
-        "weight": 0.12,
+        "weight": 0.14,
+        "role": "core",
         "rationale": "외국인이 한국 의료를 직접 선택하고 지출하는 고비용 행동.",
     },
     "economy_investment": {
         "name": "경제·투자 매력",
-        "weight": 0.12,
+        "weight": 0.14,
+        "role": "core",
         "rationale": "외국인직접투자처럼 기업과 자본이 한국을 선택하는 행동.",
     },
     "foreign_media_digital": {
         "name": "외국 언론·정보 수요",
-        "weight": 0.15,
+        "weight": 0.00,
+        "role": "observational",
         "rationale": "외국 언론 노출량과 Wikipedia 조회처럼 한국 국가 자체에 대한 정보탐색 행동. 단순 보도량은 감성 보정 전까지 점수에서 제외한다.",
     },
     "democracy_governance": {
         "name": "민주주의·거버넌스 신뢰",
-        "weight": 0.20,
+        "weight": 0.34,
+        "role": "core",
         "rationale": "정치적 권리, 시민적 자유, 민주주의 작동 수준은 국가이미지의 제도적 신뢰 기반이다.",
     },
     "lifestyle_services": {
         "name": "생활문화 서비스 소비",
-        "weight": 0.08,
+        "weight": 0.00,
+        "role": "appendix",
         "rationale": "수출액이 아니라 해외 식당 방문, 인식, 외식 서비스 선택에 나타나는 생활문화 접촉.",
     },
 }

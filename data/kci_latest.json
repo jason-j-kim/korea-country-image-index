@@ -1,8 +1,8 @@
 {
-  "date": "2026-06-28",
+  "date": "2026-06-30",
   "name": "Korea Country Image Index",
   "short_name": "KCI",
-  "scope": "K-content and Hallyu variables excluded; behavioral demand indicators for Korea as a country.",
+  "scope": "KCI-D is Korea's domestic time-series country image index. KCI-G is a separate international comparison framework over OECD, G20, and a major-30 country set.",
   "excluded_variables": [
     "K-pop",
     "K-drama",
@@ -19,15 +19,17 @@
   ],
   "formula": "KCI = weighted mean of normalized area scores; rank and bounded indicators keep their native scales; unbenchmarked Korea-only time-series indicators are capped at 95 to avoid reading a local maximum as a perfect score.",
   "headline": {
-    "kci": 82.81,
-    "simple_mean": 82.27,
-    "active_area_count": 6
+    "kci": 81.91,
+    "simple_mean": 81.54,
+    "active_area_count": 5,
+    "basis": "KCI-D domestic time-series core index; appendix and observational areas excluded from headline."
   },
   "areas": [
     {
       "id": "language_education",
       "name": "언어·교육 수요",
-      "weight": 0.18,
+      "weight": 0.2,
+      "role": "core",
       "rationale": "한국어 학습, 한국 유학, 한국학 개설처럼 시간과 비용을 투입하는 국가 선택 행동.",
       "score": 95.0,
       "indicator_count": 4,
@@ -41,7 +43,8 @@
     {
       "id": "knowledge_innovation",
       "name": "지식·혁신 역량",
-      "weight": 0.15,
+      "weight": 0.18,
+      "role": "core",
       "rationale": "특허, 연구 기여도, 혁신 순위로 나타나는 한국 지식생산 생태계의 국제적 위치.",
       "score": 88.33,
       "indicator_count": 3,
@@ -54,7 +57,8 @@
     {
       "id": "medical_services",
       "name": "의료·전문 서비스 신뢰",
-      "weight": 0.12,
+      "weight": 0.14,
+      "role": "core",
       "rationale": "외국인이 한국 의료를 직접 선택하고 지출하는 고비용 행동.",
       "score": 95.0,
       "indicator_count": 2,
@@ -66,7 +70,8 @@
     {
       "id": "economy_investment",
       "name": "경제·투자 매력",
-      "weight": 0.12,
+      "weight": 0.14,
+      "role": "core",
       "rationale": "외국인직접투자처럼 기업과 자본이 한국을 선택하는 행동.",
       "score": 51.35,
       "indicator_count": 1,
@@ -77,7 +82,8 @@
     {
       "id": "foreign_media_digital",
       "name": "외국 언론·정보 수요",
-      "weight": 0.15,
+      "weight": 0.0,
+      "role": "observational",
       "rationale": "외국 언론 노출량과 Wikipedia 조회처럼 한국 국가 자체에 대한 정보탐색 행동. 단순 보도량은 감성 보정 전까지 점수에서 제외한다.",
       "score": null,
       "indicator_count": 0,
@@ -86,7 +92,8 @@
     {
       "id": "democracy_governance",
       "name": "민주주의·거버넌스 신뢰",
-      "weight": 0.2,
+      "weight": 0.34,
+      "role": "core",
       "rationale": "정치적 권리, 시민적 자유, 민주주의 작동 수준은 국가이미지의 제도적 신뢰 기반이다.",
       "score": 78.01,
       "indicator_count": 1,
@@ -97,7 +104,8 @@
     {
       "id": "lifestyle_services",
       "name": "생활문화 서비스 소비",
-      "weight": 0.08,
+      "weight": 0.0,
+      "role": "appendix",
       "rationale": "수출액이 아니라 해외 식당 방문, 인식, 외식 서비스 선택에 나타나는 생활문화 접촉.",
       "score": 85.93,
       "indicator_count": 3,
@@ -405,89 +413,89 @@
       "source": "GDELT 2.1 DOC API, English-language global news query for South Korea/Korea",
       "status": "active",
       "latest_year": 2026,
-      "latest_value": 1197,
+      "latest_value": 1301,
       "score": null,
       "series": {
-        "2026": 1197
+        "2026": 1301
       },
       "live": {
         "ok": true,
         "source": "Google News RSS topic-basket fallback",
         "year": 2026,
-        "value": 1197,
+        "value": 1301,
         "window_days": 30,
         "query_count": 10,
         "edition_count": 6,
         "by_topic": {
-          "general_country": 243,
-          "government_politics": 59,
-          "democracy_society": 85,
+          "general_country": 252,
+          "government_politics": 116,
+          "democracy_society": 74,
           "economy_technology": 56,
-          "diplomacy_security": 49,
-          "seoul_society": 167,
-          "policy_crisis": 7,
-          "hallyu_music": 230,
-          "hallyu_screen": 163,
-          "hallyu_lifestyle": 173
+          "diplomacy_security": 47,
+          "seoul_society": 170,
+          "policy_crisis": 9,
+          "hallyu_music": 234,
+          "hallyu_screen": 199,
+          "hallyu_lifestyle": 177
         },
         "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
         "sentiment_counts": {
-          "positive": 180,
-          "neutral": 962,
-          "negative": 55
+          "positive": 182,
+          "neutral": 1019,
+          "negative": 100
         },
-        "positivity_index": 55.22,
-        "net_sentiment_index": 55.22,
+        "positivity_index": 53.15,
+        "net_sentiment_index": 53.15,
         "topic_sentiment": {
           "general_country": {
-            "positive": 24,
-            "neutral": 205,
-            "negative": 14
+            "positive": 27,
+            "neutral": 200,
+            "negative": 25
           },
           "government_politics": {
-            "positive": 8,
-            "neutral": 44,
-            "negative": 7
+            "positive": 7,
+            "neutral": 68,
+            "negative": 41
           },
           "democracy_society": {
-            "positive": 7,
-            "neutral": 70,
-            "negative": 8
+            "positive": 6,
+            "neutral": 61,
+            "negative": 7
           },
           "economy_technology": {
             "positive": 26,
-            "neutral": 27,
-            "negative": 3
+            "neutral": 28,
+            "negative": 2
           },
           "diplomacy_security": {
-            "positive": 9,
-            "neutral": 36,
-            "negative": 4
+            "positive": 8,
+            "neutral": 34,
+            "negative": 5
           },
           "seoul_society": {
             "positive": 30,
-            "neutral": 125,
-            "negative": 12
+            "neutral": 126,
+            "negative": 14
           },
           "policy_crisis": {
             "positive": 1,
-            "neutral": 3,
-            "negative": 3
+            "neutral": 4,
+            "negative": 4
           },
           "hallyu_music": {
-            "positive": 35,
-            "neutral": 192,
-            "negative": 3
+            "positive": 34,
+            "neutral": 198,
+            "negative": 2
           },
           "hallyu_screen": {
-            "positive": 17,
-            "neutral": 143,
-            "negative": 3
+            "positive": 21,
+            "neutral": 174,
+            "negative": 4
           },
           "hallyu_lifestyle": {
-            "positive": 30,
-            "neutral": 141,
-            "negative": 2
+            "positive": 26,
+            "neutral": 147,
+            "negative": 4
           }
         },
         "sample_articles": [
@@ -519,16 +527,6 @@
             "sentiment": "neutral"
           },
           {
-            "title": "From martial law to democratic renewal in South Korea - Brookings",
-            "description": "From martial law to democratic renewal in South Korea Brookings",
-            "topics": [
-              "general_country",
-              "seoul_society"
-            ],
-            "source": "Brookings",
-            "sentiment": "negative"
-          },
-          {
             "title": "Thousands demand South Korea repeat local elections after ballot shortage - Reuters",
             "description": "Thousands demand South Korea repeat local elections after ballot shortage Reuters",
             "topics": [
@@ -536,15 +534,6 @@
               "general_country"
             ],
             "source": "Reuters",
-            "sentiment": "neutral"
-          },
-          {
-            "title": "South Africa’s stirring upset books Canada showdown, South Korea bench Son Heung-min and left stunned - The New York Times",
-            "description": "South Africa’s stirring upset books Canada showdown, South Korea bench Son Heung-min and left stunned The New York Times",
-            "topics": [
-              "general_country"
-            ],
-            "source": "The New York Times",
             "sentiment": "neutral"
           },
           {
@@ -557,12 +546,21 @@
             "sentiment": "positive"
           },
           {
-            "title": "Can Sonny, South Korea’s Legendary Captain, Deliver in His Final World Cup? - newyorker.com",
-            "description": "Can Sonny, South Korea’s Legendary Captain, Deliver in His Final World Cup? newyorker.com",
+            "title": "Hwang In-beom sparks South Korea’s 2-1 comeback win over the Czech Republic at the World Cup - AP News",
+            "description": "Hwang In-beom sparks South Korea’s 2-1 comeback win over the Czech Republic at the World Cup AP News",
             "topics": [
               "general_country"
             ],
-            "source": "newyorker.com",
+            "source": "AP News",
+            "sentiment": "positive"
+          },
+          {
+            "title": "Can Sonny, South Korea’s Legendary Captain, Deliver in His Final World Cup? - The New Yorker",
+            "description": "Can Sonny, South Korea’s Legendary Captain, Deliver in His Final World Cup? The New Yorker",
+            "topics": [
+              "general_country"
+            ],
+            "source": "The New Yorker",
             "sentiment": "neutral"
           },
           {
@@ -575,8 +573,17 @@
             "sentiment": "neutral"
           },
           {
-            "title": "South Korea see Group A finale in Mexico as 'home' game - ESPN",
-            "description": "South Korea see Group A finale in Mexico as 'home' game ESPN",
+            "title": "South Africa’s stirring upset books Canada showdown, South Korea bench Son Heung-min and left stunned - The New York Times",
+            "description": "South Africa’s stirring upset books Canada showdown, South Korea bench Son Heung-min and left stunned The New York Times",
+            "topics": [
+              "general_country"
+            ],
+            "source": "The New York Times",
+            "sentiment": "neutral"
+          },
+          {
+            "title": "South Korea's shock Son Heung-Min gamble backfires spectacularly - ESPN",
+            "description": "South Korea's shock Son Heung-Min gamble backfires spectacularly ESPN",
             "topics": [
               "general_country"
             ],
@@ -584,8 +591,17 @@
             "sentiment": "neutral"
           },
           {
-            "title": "South Korea's shock Son Heung-Min gamble backfires spectacularly - ESPN",
-            "description": "South Korea's shock Son Heung-Min gamble backfires spectacularly ESPN",
+            "title": "South Korea’s World Cup wreckage: From Son’s ‘absolute heartache’ to threats against the coach - The Athletic - The New York Times",
+            "description": "South Korea’s World Cup wreckage: From Son’s ‘absolute heartache’ to threats against the coach - The Athletic The New York Times",
+            "topics": [
+              "general_country"
+            ],
+            "source": "The New York Times",
+            "sentiment": "neutral"
+          },
+          {
+            "title": "South Korea coach Hong Myung-Bo quits after World Cup exit, criticism from president - ESPN",
+            "description": "South Korea coach Hong Myung-Bo quits after World Cup exit, criticism from president ESPN",
             "topics": [
               "general_country"
             ],
@@ -647,12 +663,12 @@
             "sentiment": "neutral"
           },
           {
-            "title": "South Korea overcome Czechia via Hwang In-Beom's brilliant display - ESPN",
-            "description": "South Korea overcome Czechia via Hwang In-Beom's brilliant display ESPN",
+            "title": "South Korea's World Cup disaster prompts outlandish question from Korean journalist - Yahoo Sports",
+            "description": "South Korea's World Cup disaster prompts outlandish question from Korean journalist Yahoo Sports",
             "topics": [
               "general_country"
             ],
-            "source": "ESPN",
+            "source": "Yahoo Sports",
             "sentiment": "neutral"
           },
           {
@@ -665,39 +681,22 @@
             "sentiment": "positive"
           },
           {
-            "title": "South Africa vs. South Korea 2026 livestream: How to watch World Cup for free - Mashable",
-            "description": "South Africa vs. South Korea 2026 livestream: How to watch World Cup for free Mashable",
+            "title": "South Korea president calls for government investigation into World Cup exit as head coach resigns - The New York Times",
+            "description": "South Korea president calls for government investigation into World Cup exit as head coach resigns The New York Times",
             "topics": [
-              "general_country"
-            ],
-            "source": "Mashable",
-            "sentiment": "neutral"
-          },
-          {
-            "title": "Soccer-South Africa and South Korea seek win in decisive Group A clash - Reuters",
-            "description": "Soccer-South Africa and South Korea seek win in decisive Group A clash Reuters",
-            "topics": [
-              "general_country"
-            ],
-            "source": "Reuters",
-            "sentiment": "positive"
-          },
-          {
-            "title": "South Korea have lost their identity – with and without talisman Son Heung-min - The Athletic - The New York Times",
-            "description": "South Korea have lost their identity – with and without talisman Son Heung-min - The Athletic The New York Times",
-            "topics": [
-              "general_country"
+              "general_country",
+              "government_politics"
             ],
             "source": "The New York Times",
-            "sentiment": "neutral"
+            "sentiment": "negative"
           },
           {
-            "title": "South Africa vs South Korea Extended Highlights | 2026 FIFA World Cup™ - FOX Sports",
-            "description": "South Africa vs South Korea Extended Highlights | 2026 FIFA World Cup™ FOX Sports",
+            "title": "No Bafana, no party! South Africa stun South Korea to advance to FIFA World Cup R32 - ESPN",
+            "description": "No Bafana, no party! South Africa stun South Korea to advance to FIFA World Cup R32 ESPN",
             "topics": [
               "general_country"
             ],
-            "source": "FOX Sports",
+            "source": "ESPN",
             "sentiment": "neutral"
           },
           {
@@ -710,12 +709,21 @@
             "sentiment": "neutral"
           },
           {
-            "title": "How a Starbucks marketing stunt spiralled into mass boycotts in South Korea - The Guardian",
-            "description": "How a Starbucks marketing stunt spiralled into mass boycotts in South Korea The Guardian",
+            "title": "Soccer-South Africa and South Korea seek win in decisive Group A clash - Reuters",
+            "description": "Soccer-South Africa and South Korea seek win in decisive Group A clash Reuters",
             "topics": [
               "general_country"
             ],
-            "source": "The Guardian",
+            "source": "Reuters",
+            "sentiment": "positive"
+          },
+          {
+            "title": "Is South Korea out of the World Cup? Third-place standings reveal final place for Korean squad - Yahoo Sports",
+            "description": "Is South Korea out of the World Cup? Third-place standings reveal final place for Korean squad Yahoo Sports",
+            "topics": [
+              "general_country"
+            ],
+            "source": "Yahoo Sports",
             "sentiment": "neutral"
           }
         ],
@@ -783,8 +791,8 @@
           "https://news.google.com/rss/search?q=%28%22K-beauty%22+OR+%22Korean+beauty%22+OR+%22K-food%22+OR+%22Korean+food%22+OR+%22Korean+tourism%22+OR+%22Korean+fashion%22%29+when%3A30d&hl=en-SG&gl=SG&ceid=SG%3Aen"
         ],
         "errors": [],
-        "primary_error": "'list' object has no attribute 'get'",
-        "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260529125824&enddatetime=20260628125824"
+        "primary_error": "HTTP Error 429: Too Many Requests",
+        "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530225934&enddatetime=20260629225934"
       }
     },
     {
@@ -795,20 +803,20 @@
       "source": "Google News RSS headline/description lexicon sentiment. Observational until full article NLP is added.",
       "status": "active",
       "latest_year": 2026,
-      "latest_value": 55.22,
+      "latest_value": 53.15,
       "score": null,
       "series": {
-        "2026": 55.22
+        "2026": 53.15
       },
       "live": {
         "ok": true,
         "year": 2026,
-        "value": 55.22,
-        "net_sentiment_index": 55.22,
+        "value": 53.15,
+        "net_sentiment_index": 53.15,
         "sentiment_counts": {
-          "positive": 180,
-          "neutral": 962,
-          "negative": 55
+          "positive": 182,
+          "neutral": 1019,
+          "negative": 100
         },
         "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
         "source": "Google News RSS topic-basket fallback"
@@ -936,33 +944,33 @@
     "global": [
       {
         "year": 2021,
-        "kci": 44.22,
-        "simple_mean": 38.74
+        "kci": 53.93,
+        "simple_mean": 46.49
       },
       {
         "year": 2022,
-        "kci": 47.47,
-        "simple_mean": 42.94
+        "kci": 55.01,
+        "simple_mean": 51.53
       },
       {
         "year": 2023,
-        "kci": 53.65,
-        "simple_mean": 55.9
+        "kci": 49.87,
+        "simple_mean": 52.76
       },
       {
         "year": 2024,
-        "kci": 52.42,
-        "simple_mean": 57.73
+        "kci": 44.94,
+        "simple_mean": 54.96
       },
       {
         "year": 2025,
-        "kci": 65.75,
-        "simple_mean": 69.39
+        "kci": 59.09,
+        "simple_mean": 64.27
       },
       {
         "year": 2026,
-        "kci": 72.93,
-        "simple_mean": 74.48
+        "kci": 69.46,
+        "simple_mean": 70.37
       }
     ],
     "areas": {
@@ -1152,7 +1160,7 @@
     "comparison": {
       "from_year": 2021,
       "to_year": 2026,
-      "kci_change": 28.71
+      "kci_change": 15.53
     }
   },
   "democracy": {
@@ -1429,85 +1437,243 @@
     },
     "method_note": "Composite tracks South Korea from 2018 using the user-specified weights. Some components are seeded until bulk source files are imported; component quality flags identify this."
   },
+  "global_comparison": {
+    "name": "KCI-G International Comparison Index",
+    "short_name": "KCI-G",
+    "status": "framework_ready",
+    "comparison_groups": {
+      "OECD_sample": [
+        "AUS",
+        "CAN",
+        "FRA",
+        "DEU",
+        "ITA",
+        "JPN",
+        "KOR",
+        "MEX",
+        "NLD",
+        "ESP",
+        "SWE",
+        "TUR",
+        "GBR",
+        "USA"
+      ],
+      "G20_sample": [
+        "ARG",
+        "AUS",
+        "BRA",
+        "CAN",
+        "CHN",
+        "FRA",
+        "DEU",
+        "IND",
+        "IDN",
+        "ITA",
+        "JPN",
+        "KOR",
+        "MEX",
+        "SAU",
+        "ZAF",
+        "TUR",
+        "GBR",
+        "USA"
+      ],
+      "major_30": [
+        "ARG",
+        "AUS",
+        "BRA",
+        "CAN",
+        "CHN",
+        "FRA",
+        "DEU",
+        "IND",
+        "IDN",
+        "ITA",
+        "JPN",
+        "KOR",
+        "MEX",
+        "NLD",
+        "SAU",
+        "SGP",
+        "ESP",
+        "SWE",
+        "THA",
+        "TUR",
+        "GBR",
+        "USA",
+        "VNM",
+        "ZAF",
+        "ARE",
+        "POL",
+        "MYS",
+        "PHL",
+        "EGY",
+        "QAT"
+      ]
+    },
+    "country_names": {
+      "ARG": "Argentina",
+      "AUS": "Australia",
+      "BRA": "Brazil",
+      "CAN": "Canada",
+      "CHN": "China",
+      "EGY": "Egypt",
+      "FRA": "France",
+      "DEU": "Germany",
+      "IND": "India",
+      "IDN": "Indonesia",
+      "ITA": "Italy",
+      "JPN": "Japan",
+      "KOR": "South Korea",
+      "MEX": "Mexico",
+      "MYS": "Malaysia",
+      "NLD": "Netherlands",
+      "PHL": "Philippines",
+      "POL": "Poland",
+      "QAT": "Qatar",
+      "SAU": "Saudi Arabia",
+      "SGP": "Singapore",
+      "ZAF": "South Africa",
+      "ESP": "Spain",
+      "SWE": "Sweden",
+      "THA": "Thailand",
+      "TUR": "Turkey",
+      "ARE": "United Arab Emirates",
+      "GBR": "United Kingdom",
+      "USA": "United States",
+      "VNM": "Vietnam"
+    },
+    "korea": {
+      "iso3": "KOR",
+      "name": "South Korea",
+      "democracy_governance_position": {
+        "year": 2026,
+        "index": 78.01,
+        "components": {
+          "freedom_house_total": 83,
+          "vdem_liberal_democracy": 79,
+          "vdem_electoral_democracy": 84,
+          "wgi_voice_accountability": 72,
+          "wgi_rule_of_law": 82,
+          "transparency_cpi": 64,
+          "rsf_press_freedom": 69.12
+        },
+        "coverage_weight": 1.0
+      }
+    },
+    "candidate_dimensions": [
+      {
+        "id": "democracy_governance",
+        "name": "Democracy and governance",
+        "status": "partially_ready",
+        "source_plan": "Freedom House, V-Dem, WGI, Transparency CPI, RSF by country-year."
+      },
+      {
+        "id": "knowledge_innovation",
+        "name": "Knowledge and innovation",
+        "status": "planned",
+        "source_plan": "WIPO GII, PCT, Nature Index or Scimago by country-year."
+      },
+      {
+        "id": "education_language_attraction",
+        "name": "Education and language attraction",
+        "status": "planned",
+        "source_plan": "UNESCO/OECD international students, language learning platform country demand where comparable."
+      },
+      {
+        "id": "medical_service_attraction",
+        "name": "Medical service attraction",
+        "status": "planned",
+        "source_plan": "Comparable medical tourism data are limited; use cautiously or omit from KCI-G."
+      },
+      {
+        "id": "foreign_media_exposure",
+        "name": "Foreign media exposure and sentiment",
+        "status": "partially_ready",
+        "source_plan": "Apply the same Google News/GDELT topic basket to all comparison countries."
+      }
+    ],
+    "method_note": "KCI-D remains Korea's internal time-series index. KCI-G is a separate international comparison framework over OECD, G20, and a major-30 country set. Values should not be merged until cross-country source coverage is complete."
+  },
   "live_collection": {
     "foreign_media_coverage": {
       "ok": true,
       "source": "Google News RSS topic-basket fallback",
       "year": 2026,
-      "value": 1197,
+      "value": 1301,
       "window_days": 30,
       "query_count": 10,
       "edition_count": 6,
       "by_topic": {
-        "general_country": 243,
-        "government_politics": 59,
-        "democracy_society": 85,
+        "general_country": 252,
+        "government_politics": 116,
+        "democracy_society": 74,
         "economy_technology": 56,
-        "diplomacy_security": 49,
-        "seoul_society": 167,
-        "policy_crisis": 7,
-        "hallyu_music": 230,
-        "hallyu_screen": 163,
-        "hallyu_lifestyle": 173
+        "diplomacy_security": 47,
+        "seoul_society": 170,
+        "policy_crisis": 9,
+        "hallyu_music": 234,
+        "hallyu_screen": 199,
+        "hallyu_lifestyle": 177
       },
       "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
       "sentiment_counts": {
-        "positive": 180,
-        "neutral": 962,
-        "negative": 55
+        "positive": 182,
+        "neutral": 1019,
+        "negative": 100
       },
-      "positivity_index": 55.22,
-      "net_sentiment_index": 55.22,
+      "positivity_index": 53.15,
+      "net_sentiment_index": 53.15,
       "topic_sentiment": {
         "general_country": {
-          "positive": 24,
-          "neutral": 205,
-          "negative": 14
+          "positive": 27,
+          "neutral": 200,
+          "negative": 25
         },
         "government_politics": {
-          "positive": 8,
-          "neutral": 44,
-          "negative": 7
+          "positive": 7,
+          "neutral": 68,
+          "negative": 41
         },
         "democracy_society": {
-          "positive": 7,
-          "neutral": 70,
-          "negative": 8
+          "positive": 6,
+          "neutral": 61,
+          "negative": 7
         },
         "economy_technology": {
           "positive": 26,
-          "neutral": 27,
-          "negative": 3
+          "neutral": 28,
+          "negative": 2
         },
         "diplomacy_security": {
-          "positive": 9,
-          "neutral": 36,
-          "negative": 4
+          "positive": 8,
+          "neutral": 34,
+          "negative": 5
         },
         "seoul_society": {
           "positive": 30,
-          "neutral": 125,
-          "negative": 12
+          "neutral": 126,
+          "negative": 14
         },
         "policy_crisis": {
           "positive": 1,
-          "neutral": 3,
-          "negative": 3
+          "neutral": 4,
+          "negative": 4
         },
         "hallyu_music": {
-          "positive": 35,
-          "neutral": 192,
-          "negative": 3
+          "positive": 34,
+          "neutral": 198,
+          "negative": 2
         },
         "hallyu_screen": {
-          "positive": 17,
-          "neutral": 143,
-          "negative": 3
+          "positive": 21,
+          "neutral": 174,
+          "negative": 4
         },
         "hallyu_lifestyle": {
-          "positive": 30,
-          "neutral": 141,
-          "negative": 2
+          "positive": 26,
+          "neutral": 147,
+          "negative": 4
         }
       },
       "sample_articles": [
@@ -1539,16 +1705,6 @@
           "sentiment": "neutral"
         },
         {
-          "title": "From martial law to democratic renewal in South Korea - Brookings",
-          "description": "From martial law to democratic renewal in South Korea Brookings",
-          "topics": [
-            "general_country",
-            "seoul_society"
-          ],
-          "source": "Brookings",
-          "sentiment": "negative"
-        },
-        {
           "title": "Thousands demand South Korea repeat local elections after ballot shortage - Reuters",
           "description": "Thousands demand South Korea repeat local elections after ballot shortage Reuters",
           "topics": [
@@ -1556,15 +1712,6 @@
             "general_country"
           ],
           "source": "Reuters",
-          "sentiment": "neutral"
-        },
-        {
-          "title": "South Africa’s stirring upset books Canada showdown, South Korea bench Son Heung-min and left stunned - The New York Times",
-          "description": "South Africa’s stirring upset books Canada showdown, South Korea bench Son Heung-min and left stunned The New York Times",
-          "topics": [
-            "general_country"
-          ],
-          "source": "The New York Times",
           "sentiment": "neutral"
         },
         {
@@ -1577,12 +1724,21 @@
           "sentiment": "positive"
         },
         {
-          "title": "Can Sonny, South Korea’s Legendary Captain, Deliver in His Final World Cup? - newyorker.com",
-          "description": "Can Sonny, South Korea’s Legendary Captain, Deliver in His Final World Cup? newyorker.com",
+          "title": "Hwang In-beom sparks South Korea’s 2-1 comeback win over the Czech Republic at the World Cup - AP News",
+          "description": "Hwang In-beom sparks South Korea’s 2-1 comeback win over the Czech Republic at the World Cup AP News",
           "topics": [
             "general_country"
           ],
-          "source": "newyorker.com",
+          "source": "AP News",
+          "sentiment": "positive"
+        },
+        {
+          "title": "Can Sonny, South Korea’s Legendary Captain, Deliver in His Final World Cup? - The New Yorker",
+          "description": "Can Sonny, South Korea’s Legendary Captain, Deliver in His Final World Cup? The New Yorker",
+          "topics": [
+            "general_country"
+          ],
+          "source": "The New Yorker",
           "sentiment": "neutral"
         },
         {
@@ -1595,8 +1751,17 @@
           "sentiment": "neutral"
         },
         {
-          "title": "South Korea see Group A finale in Mexico as 'home' game - ESPN",
-          "description": "South Korea see Group A finale in Mexico as 'home' game ESPN",
+          "title": "South Africa’s stirring upset books Canada showdown, South Korea bench Son Heung-min and left stunned - The New York Times",
+          "description": "South Africa’s stirring upset books Canada showdown, South Korea bench Son Heung-min and left stunned The New York Times",
+          "topics": [
+            "general_country"
+          ],
+          "source": "The New York Times",
+          "sentiment": "neutral"
+        },
+        {
+          "title": "South Korea's shock Son Heung-Min gamble backfires spectacularly - ESPN",
+          "description": "South Korea's shock Son Heung-Min gamble backfires spectacularly ESPN",
           "topics": [
             "general_country"
           ],
@@ -1604,8 +1769,17 @@
           "sentiment": "neutral"
         },
         {
-          "title": "South Korea's shock Son Heung-Min gamble backfires spectacularly - ESPN",
-          "description": "South Korea's shock Son Heung-Min gamble backfires spectacularly ESPN",
+          "title": "South Korea’s World Cup wreckage: From Son’s ‘absolute heartache’ to threats against the coach - The Athletic - The New York Times",
+          "description": "South Korea’s World Cup wreckage: From Son’s ‘absolute heartache’ to threats against the coach - The Athletic The New York Times",
+          "topics": [
+            "general_country"
+          ],
+          "source": "The New York Times",
+          "sentiment": "neutral"
+        },
+        {
+          "title": "South Korea coach Hong Myung-Bo quits after World Cup exit, criticism from president - ESPN",
+          "description": "South Korea coach Hong Myung-Bo quits after World Cup exit, criticism from president ESPN",
           "topics": [
             "general_country"
           ],
@@ -1667,12 +1841,12 @@
           "sentiment": "neutral"
         },
         {
-          "title": "South Korea overcome Czechia via Hwang In-Beom's brilliant display - ESPN",
-          "description": "South Korea overcome Czechia via Hwang In-Beom's brilliant display ESPN",
+          "title": "South Korea's World Cup disaster prompts outlandish question from Korean journalist - Yahoo Sports",
+          "description": "South Korea's World Cup disaster prompts outlandish question from Korean journalist Yahoo Sports",
           "topics": [
             "general_country"
           ],
-          "source": "ESPN",
+          "source": "Yahoo Sports",
           "sentiment": "neutral"
         },
         {
@@ -1685,39 +1859,22 @@
           "sentiment": "positive"
         },
         {
-          "title": "South Africa vs. South Korea 2026 livestream: How to watch World Cup for free - Mashable",
-          "description": "South Africa vs. South Korea 2026 livestream: How to watch World Cup for free Mashable",
+          "title": "South Korea president calls for government investigation into World Cup exit as head coach resigns - The New York Times",
+          "description": "South Korea president calls for government investigation into World Cup exit as head coach resigns The New York Times",
           "topics": [
-            "general_country"
-          ],
-          "source": "Mashable",
-          "sentiment": "neutral"
-        },
-        {
-          "title": "Soccer-South Africa and South Korea seek win in decisive Group A clash - Reuters",
-          "description": "Soccer-South Africa and South Korea seek win in decisive Group A clash Reuters",
-          "topics": [
-            "general_country"
-          ],
-          "source": "Reuters",
-          "sentiment": "positive"
-        },
-        {
-          "title": "South Korea have lost their identity – with and without talisman Son Heung-min - The Athletic - The New York Times",
-          "description": "South Korea have lost their identity – with and without talisman Son Heung-min - The Athletic The New York Times",
-          "topics": [
-            "general_country"
+            "general_country",
+            "government_politics"
           ],
           "source": "The New York Times",
-          "sentiment": "neutral"
+          "sentiment": "negative"
         },
         {
-          "title": "South Africa vs South Korea Extended Highlights | 2026 FIFA World Cup™ - FOX Sports",
-          "description": "South Africa vs South Korea Extended Highlights | 2026 FIFA World Cup™ FOX Sports",
+          "title": "No Bafana, no party! South Africa stun South Korea to advance to FIFA World Cup R32 - ESPN",
+          "description": "No Bafana, no party! South Africa stun South Korea to advance to FIFA World Cup R32 ESPN",
           "topics": [
             "general_country"
           ],
-          "source": "FOX Sports",
+          "source": "ESPN",
           "sentiment": "neutral"
         },
         {
@@ -1730,12 +1887,21 @@
           "sentiment": "neutral"
         },
         {
-          "title": "How a Starbucks marketing stunt spiralled into mass boycotts in South Korea - The Guardian",
-          "description": "How a Starbucks marketing stunt spiralled into mass boycotts in South Korea The Guardian",
+          "title": "Soccer-South Africa and South Korea seek win in decisive Group A clash - Reuters",
+          "description": "Soccer-South Africa and South Korea seek win in decisive Group A clash Reuters",
           "topics": [
             "general_country"
           ],
-          "source": "The Guardian",
+          "source": "Reuters",
+          "sentiment": "positive"
+        },
+        {
+          "title": "Is South Korea out of the World Cup? Third-place standings reveal final place for Korean squad - Yahoo Sports",
+          "description": "Is South Korea out of the World Cup? Third-place standings reveal final place for Korean squad Yahoo Sports",
+          "topics": [
+            "general_country"
+          ],
+          "source": "Yahoo Sports",
           "sentiment": "neutral"
         }
       ],
@@ -1803,18 +1969,18 @@
         "https://news.google.com/rss/search?q=%28%22K-beauty%22+OR+%22Korean+beauty%22+OR+%22K-food%22+OR+%22Korean+food%22+OR+%22Korean+tourism%22+OR+%22Korean+fashion%22%29+when%3A30d&hl=en-SG&gl=SG&ceid=SG%3Aen"
       ],
       "errors": [],
-      "primary_error": "'list' object has no attribute 'get'",
-      "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260529125824&enddatetime=20260628125824"
+      "primary_error": "HTTP Error 429: Too Many Requests",
+      "primary_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%28%22South+Korea%22+OR+%22Republic+of+Korea%22%29+sourcelang%3Aenglish&mode=timelinevolraw&format=json&startdatetime=20260530225934&enddatetime=20260629225934"
     },
     "foreign_media_positivity": {
       "ok": true,
       "year": 2026,
-      "value": 55.22,
-      "net_sentiment_index": 55.22,
+      "value": 53.15,
+      "net_sentiment_index": 53.15,
       "sentiment_counts": {
-        "positive": 180,
-        "neutral": 962,
-        "negative": 55
+        "positive": 182,
+        "neutral": 1019,
+        "negative": 100
       },
       "sentiment_method": "English headline/description lexicon, positive/neutral/negative; quick exposure signal, not full article NLP.",
       "source": "Google News RSS topic-basket fallback"

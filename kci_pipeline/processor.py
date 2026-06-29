@@ -6,6 +6,7 @@ from pathlib import Path
 
 from . import config
 from .democracy import build_democracy_index
+from .global_compare import build_global_comparison
 
 
 def _latest_year_value(series: dict[int, float]) -> tuple[int | None, float | None]:
@@ -122,6 +123,7 @@ def _area_scores(indicator_rows: list[dict]) -> list[dict]:
                 "id": area_id,
                 "name": meta["name"],
                 "weight": meta["weight"],
+                "role": meta.get("role", "core"),
                 "rationale": meta["rationale"],
                 "score": score,
                 "indicator_count": len(rows),
@@ -132,7 +134,7 @@ def _area_scores(indicator_rows: list[dict]) -> list[dict]:
 
 
 def _headline(areas: list[dict]) -> dict:
-    active = [area for area in areas if area.get("score") is not None]
+    active = [area for area in areas if area.get("score") is not None and area.get("role") == "core"]
     total_weight = sum(area["weight"] for area in active)
     weighted = sum(area["score"] * area["weight"] for area in active) / total_weight if total_weight else 0
     simple = sum(area["score"] for area in active) / len(active) if active else 0
@@ -140,6 +142,7 @@ def _headline(areas: list[dict]) -> dict:
         "kci": round(weighted, 2),
         "simple_mean": round(simple, 2),
         "active_area_count": len(active),
+        "basis": "KCI-D domestic time-series core index; appendix and observational areas excluded from headline.",
     }
 
 
@@ -172,6 +175,8 @@ def _history(indicator_rows: list[dict]) -> dict:
         weighted_sum = 0.0
         total_weight = 0.0
         for area_id, meta in config.AREAS.items():
+            if meta.get("role", "core") != "core":
+                continue
             score = by_area[area_id][year_index]["score"]
             if score is None:
                 continue
@@ -204,6 +209,7 @@ def build_index(live: dict | None = None) -> dict:
     live = live or {}
     indicator_rows = _merge_live_series(config.INDICATORS, live)
     indicator_rows, democracy = _append_democracy_index(indicator_rows)
+    global_comparison = build_global_comparison(democracy)
     areas = _area_scores(indicator_rows)
     headline = _headline(areas)
     now = datetime.now(timezone(timedelta(hours=9)))
@@ -211,7 +217,7 @@ def build_index(live: dict | None = None) -> dict:
         "date": now.strftime("%Y-%m-%d"),
         "name": "Korea Country Image Index",
         "short_name": "KCI",
-        "scope": "K-content and Hallyu variables excluded; behavioral demand indicators for Korea as a country.",
+        "scope": "KCI-D is Korea's domestic time-series country image index. KCI-G is a separate international comparison framework over OECD, G20, and a major-30 country set.",
         "excluded_variables": config.EXCLUDED_VARIABLES,
         "formula": "KCI = weighted mean of normalized area scores; rank and bounded indicators keep their native scales; unbenchmarked Korea-only time-series indicators are capped at 95 to avoid reading a local maximum as a perfect score.",
         "headline": headline,
@@ -219,6 +225,7 @@ def build_index(live: dict | None = None) -> dict:
         "indicators": indicator_rows,
         "history": _history(indicator_rows),
         "democracy": democracy,
+        "global_comparison": global_comparison,
         "live_collection": live,
     }
 
@@ -230,6 +237,8 @@ def export_index(index: dict) -> dict[str, Path]:
     js_path = config.DATA_DIR / "kci_latest.js"
     kdi_json_path = config.DATA_DIR / "kdi_latest.json"
     kdi_js_path = config.DATA_DIR / "kdi_latest.js"
+    kcig_json_path = config.DATA_DIR / "kcig_latest.json"
+    kcig_js_path = config.DATA_DIR / "kcig_latest.js"
     dated_path = config.OUTPUT_DIR / f"{index['date']}_kci_latest.json"
     text = json.dumps(index, ensure_ascii=False, indent=2)
     json_path.write_text(text, encoding="utf-8")
@@ -237,5 +246,16 @@ def export_index(index: dict) -> dict[str, Path]:
     democracy_text = json.dumps(index.get("democracy", {}), ensure_ascii=False, indent=2)
     kdi_json_path.write_text(democracy_text, encoding="utf-8")
     kdi_js_path.write_text(f"window.KDI_LATEST = {democracy_text};\n", encoding="utf-8")
+    global_text = json.dumps(index.get("global_comparison", {}), ensure_ascii=False, indent=2)
+    kcig_json_path.write_text(global_text, encoding="utf-8")
+    kcig_js_path.write_text(f"window.KCIG_LATEST = {global_text};\n", encoding="utf-8")
     dated_path.write_text(text, encoding="utf-8")
-    return {"json": json_path, "js": js_path, "kdi_json": kdi_json_path, "kdi_js": kdi_js_path, "dated": dated_path}
+    return {
+        "json": json_path,
+        "js": js_path,
+        "kdi_json": kdi_json_path,
+        "kdi_js": kdi_js_path,
+        "kcig_json": kcig_json_path,
+        "kcig_js": kcig_js_path,
+        "dated": dated_path,
+    }

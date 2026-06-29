@@ -86,28 +86,25 @@ function renderHeadline() {
 
 function renderAreaCards() {
   const core = payload.areas.filter((area) => area.role === "core");
-  const observational = payload.areas.filter((area) => area.role === "observational");
-  const appendix = payload.areas.filter((area) => area.role === "appendix");
-  const renderCard = (area, index, label) => `
+  const renderCard = (area, index) => `
     <article class="${area.role}">
       <span style="--c:${palette[index % palette.length]}">${area.name}</span>
-      <strong>${area.score === null || area.score === undefined ? label : score(area.score)}</strong>
+      <strong>${score(area.score)}</strong>
       <p>${area.rationale}</p>
-      <small>${label} · 가중치 ${Math.round(area.weight * 100)}% · 변수 ${area.indicator_count}개</small>
+      <small>본지수 · 가중치 ${Math.round(area.weight * 100)}% · 변수 ${area.indicator_count}개</small>
     </article>
   `;
   areaCards.innerHTML = `
     <div class="card-group-title">본지수 KCI-D</div>
-    ${core.map((area, index) => renderCard(area, index, "본지수")).join("")}
-    <div class="card-group-title">관측·부록</div>
-    ${observational.map((area, index) => renderCard(area, index + core.length, "관측")).join("")}
-    ${appendix.map((area, index) => renderCard(area, index + core.length + observational.length, "부록")).join("")}
+    ${core.map((area, index) => renderCard(area, index)).join("")}
   `;
 }
 
 function renderIndicatorTable() {
+  const coreAreaIds = new Set(payload.areas.filter((area) => area.role === "core").map((area) => area.id));
   const rows = payload.indicators
     .filter((item) => item.status !== "connector_required")
+    .filter((item) => coreAreaIds.has(item.area))
     .map((item) => {
       const area = payload.areas.find((entry) => entry.id === item.area);
       return `

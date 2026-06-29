@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>K민주주의 | 한국 민주주의 지수</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="democracy-page">
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="KCI 홈">
+      <span class="brand-mark">K</span>
+      <span>
+        <strong>K민주주의</strong>
+        <small>시계열 / 국제비교</small>
+      </span>
+    </a>
+    <nav aria-label="K민주주의 주요 섹션">
+      <a href="#korea">한국 시계열</a>
+      <a href="#global">국제비교</a>
+      <a href="#components">구성지표</a>
+      <a href="index.html">KCI 홈</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="kd-hero" id="overview">
+      <div>
+        <p class="eyebrow">K-Democracy Index</p>
+        <h1>한국 민주주의의 시간 변화와 현재 국제 위치를 함께 본다.</h1>
+        <p>
+          K민주주의는 Freedom House, V-Dem, WGI, Transparency CPI, RSF 언론자유를
+          하나의 0-100 지수로 묶어 한국의 2018년 이후 변화와 현재 주요국 비교를 분리해 보여줍니다.
+        </p>
+      </div>
+      <aside class="kd-score">
+        <span>한국 최신 점수</span>
+        <strong id="kdLatest">--</strong>
+        <small id="kdLatestMeta">data/kdemocracy_latest.json</small>
+      </aside>
+    </section>
+
+    <section class="section kd-dashboard" id="korea">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Domestic Time Series</p>
+          <h2>한국 민주주의 지수 2018-2026</h2>
+        </div>
+        <small id="kdStatus">데이터 로딩 중</small>
+      </div>
+      <div class="kd-grid">
+        <article class="kd-card">
+          <span>2018년 대비 변화</span>
+          <strong id="kdChange">--</strong>
+          <small>동일 가중치 기준</small>
+        </article>
+        <article class="kd-card">
+          <span>국제 비교표 순위</span>
+          <strong id="kdGlobalRank">--</strong>
+          <small>파일럿 비교 18개국</small>
+        </article>
+        <article class="kd-card">
+          <span>G20 표본 순위</span>
+          <strong id="kdG20Rank">--</strong>
+          <small>OECD/G20 주요국 표본</small>
+        </article>
+        <article class="kd-chart-panel">
+          <canvas id="kdHistoryChart" width="900" height="360" aria-label="한국 민주주의 지수 시계열"></canvas>
+        </article>
+      </div>
+    </section>
+
+    <section class="section kd-global" id="global">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Current International Position</p>
+          <h2>현재 시점 국제비교</h2>
+        </div>
+        <small>최신 공개지표 기반 파일럿</small>
+      </div>
+      <div class="kd-global-layout">
+        <article class="kd-chart-panel">
+          <canvas id="kdGlobalChart" width="900" height="460" aria-label="국가별 K민주주의 점수 비교"></canvas>
+        </article>
+        <div id="kdRanking" class="kd-ranking"></div>
+      </div>
+    </section>
+
+    <section class="section" id="components">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Index Design</p>
+          <h2>7개 구성지표와 가중치</h2>
+        </div>
+      </div>
+      <div id="kdComponents" class="kd-components"></div>
+      <div class="kd-note">
+        <h3>해석 원칙</h3>
+        <p>
+          한국 시계열은 동일 산식으로 비교합니다. 국제비교는 현재 공개된 최신 연도 값을 맞춘 파일럿이며,
+          원자료 CSV/API 자동수집이 완료되면 국가별 구성값을 모두 실측으로 대체합니다.
+        </p>
+        <div id="kdSources" class="kd-sources"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>K민주주의 · Korea Democracy Index</p>
+    <p>Updated from data/kdemocracy_latest.json</p>
+  </footer>
+
+  <script src="data/kdemocracy_latest.js"></script>
+  <script src="k-democracy.js"></script>
+</body>
+</html>

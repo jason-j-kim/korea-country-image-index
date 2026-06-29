@@ -606,13 +606,22 @@ footer p {
 }
 
 #kdHistoryChart,
-#kdGlobalChart {
+#kdGlobalChart,
+#kdG20Chart {
   width: 100%;
   min-height: 360px;
 }
 
 #kdGlobalChart {
   min-height: 460px;
+}
+
+.kd-g20-panel {
+  margin-top: 18px;
+}
+
+#kdG20Chart {
+  min-height: 420px;
 }
 
 .kd-global-layout {

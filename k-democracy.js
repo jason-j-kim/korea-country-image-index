@@ -114,6 +114,56 @@ function drawGlobalChart() {
   ctx.textAlign = "left";
 }
 
+function drawG20Chart() {
+  const canvas = document.querySelector("#kdG20Chart");
+  const { ctx, width, height } = setupCanvas(canvas);
+  const rows = kdData.international_comparison
+    .filter((row) => row.group.includes("G20"))
+    .sort((a, b) => b.score - a.score);
+  const padding = { top: 22, right: 34, bottom: 94, left: 52 };
+  const chartW = width - padding.left - padding.right;
+  const chartH = height - padding.top - padding.bottom;
+  const lane = chartW / Math.max(rows.length, 1);
+  const barW = lane * 0.56;
+
+  ctx.strokeStyle = "#d9e0e8";
+  ctx.lineWidth = 1;
+  ctx.font = "12px Segoe UI, sans-serif";
+  ctx.fillStyle = "#657080";
+  for (let i = 0; i <= 4; i += 1) {
+    const value = i * 25;
+    const y = padding.top + chartH - (chartH * value) / 100;
+    ctx.beginPath();
+    ctx.moveTo(padding.left, y);
+    ctx.lineTo(padding.left + chartW, y);
+    ctx.stroke();
+    ctx.fillText(String(value), 16, y + 4);
+  }
+
+  rows.forEach((row, index) => {
+    const x = padding.left + lane * index + (lane - barW) / 2;
+    const barH = (chartH * row.score) / 100;
+    const y = padding.top + chartH - barH;
+    const isKorea = row.country === "South Korea";
+    ctx.fillStyle = isKorea ? "#d8426b" : kdPalette[index % kdPalette.length];
+    ctx.fillRect(x, y, barW, barH);
+    ctx.fillStyle = "#17202a";
+    ctx.font = `${isKorea ? "800" : "700"} 12px Segoe UI, sans-serif`;
+    ctx.textAlign = "center";
+    ctx.fillText(`${index + 1}`, x + barW / 2, y - 22);
+    ctx.fillText(kdScore(row.score), x + barW / 2, y - 7);
+    ctx.save();
+    ctx.translate(x + barW / 2, padding.top + chartH + 18);
+    ctx.rotate(-Math.PI / 5);
+    ctx.textAlign = "right";
+    ctx.font = `${isKorea ? "800" : "600"} 12px Segoe UI, sans-serif`;
+    ctx.fillStyle = isKorea ? "#d8426b" : "#405064";
+    ctx.fillText(row.country, 0, 0);
+    ctx.restore();
+  });
+  ctx.textAlign = "left";
+}
+
 function renderRanking() {
   const rows = kdData.international_comparison.map((row) => `
     <div class="${row.country === "South Korea" ? "is-korea" : ""}">
@@ -146,11 +196,13 @@ function renderAll() {
   renderComponents();
   drawHistoryChart();
   drawGlobalChart();
+  drawG20Chart();
 }
 
 window.addEventListener("resize", () => {
   drawHistoryChart();
   drawGlobalChart();
+  drawG20Chart();
 });
 
 renderAll();

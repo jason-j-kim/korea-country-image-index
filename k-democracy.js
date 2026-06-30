@@ -168,7 +168,7 @@ function drawAlternationChart() {
   const canvas = document.querySelector("#kdAlternationChart");
   const { ctx, width, height } = setupCanvas(canvas);
   const rows = kdData.power_alternation.comparison.slice().sort((a, b) => b.score - a.score);
-  const padding = { top: 26, right: 38, bottom: 100, left: 50 };
+  const padding = { top: 52, right: 38, bottom: 100, left: 50 };
   const chartW = width - padding.left - padding.right;
   const chartH = height - padding.top - padding.bottom;
   const lane = chartW / Math.max(rows.length, 1);
@@ -199,8 +199,8 @@ function drawAlternationChart() {
     ctx.fillStyle = "#17202a";
     ctx.font = `${isKorea || isJapan ? "800" : "700"} 12px Segoe UI, sans-serif`;
     ctx.textAlign = "center";
-    ctx.fillText(`${row.alternations}회`, x + barW / 2, y - 22);
-    ctx.fillText(kdScore(row.score), x + barW / 2, y - 7);
+    ctx.fillText(`${row.alternations}회`, x + barW / 2, y + 18);
+    ctx.fillText(kdScore(row.score), x + barW / 2, y + 34);
     ctx.save();
     ctx.translate(x + barW / 2, padding.top + chartH + 18);
     ctx.rotate(-Math.PI / 5);

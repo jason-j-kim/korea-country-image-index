@@ -24,8 +24,7 @@ LATEST_JS = DATA_DIR / "hallyu_exports_granger_latest.js"
 
 DEFAULT_KEYWORDS = ["K wave", "Korea", "Seoul", "BTS", "K pop", "K movie", "K drama", "K food", "K beauty"]
 
-SECTOR_HS = {
-    "total_exports": ["TOTAL"],
+DATA_GO_KR_SECTOR_HS = {
     "electronics_hs85": ["85"],
     "cosmetics_hs3304": ["3304"],
     "processed_food_hs16_21": ["16", "17", "18", "19", "20", "21"],
@@ -57,7 +56,7 @@ def parse_month(value: object) -> str:
     text = str(value).strip()
     if len(text) == 6 and text.isdigit():
         return f"{text[:4]}-{text[4:]}"
-    return pd.to_datetime(text).to_period("M").astype(str)
+    return str(pd.to_datetime(text).to_period("M"))
 
 
 def load_trends_monthly(path: Path, keywords: list[str]) -> pd.DataFrame:
@@ -140,6 +139,101 @@ def fetch_comtrade_exports(start_month: str, end_month: str, api_key: str, pause
     return frame
 
 
+def year_chunks(start_month: str, end_month: str) -> list[tuple[str, str]]:
+    periods = pd.period_range(start=start_month, end=end_month, freq="M")
+    chunks = []
+    for _, group in pd.Series(periods).groupby([period.year for period in periods]):
+        chunks.append((group.iloc[0].strftime("%Y%m"), group.iloc[-1].strftime("%Y%m")))
+    return chunks
+
+
+def fetch_kosis_total_exports(start_month: str, end_month: str, api_key: str) -> pd.DataFrame:
+    endpoint = "https://kosis.kr/openapi/Param/statisticsParameterData.do"
+    params = {
+        "method": "getList",
+        "apiKey": api_key,
+        "orgId": "134",
+        "tblId": "DT_134001_001",
+        "itmId": "T002",
+        "objL1": "ALL",
+        "format": "json",
+        "jsonVD": "Y",
+        "prdSe": "M",
+        "startPrdDe": start_month.replace("-", ""),
+        "endPrdDe": end_month.replace("-", ""),
+    }
+    response = requests.get(endpoint, params=params, timeout=40)
+    if response.status_code >= 400:
+        raise RuntimeError(f"KOSIS request failed {response.status_code}: {response.text[:300]}")
+    rows = response.json()
+    if isinstance(rows, dict) and rows.get("err"):
+        raise RuntimeError(f"KOSIS request failed: {rows}")
+    output = []
+    for row in rows:
+        if row.get("ITM_ID") != "T002":
+            continue
+        period = str(row["PRD_DE"])
+        output.append(
+            {
+                "month": f"{period[:4]}-{period[4:]}",
+                "sector": "total_exports",
+                "export_usd": float(row["DT"]) * 1000.0,
+            }
+        )
+    return pd.DataFrame(output)
+
+
+def data_go_kr_get_range_hs(start_period: str, end_period: str, hs_code: str, api_key: str, pause: float) -> dict[str, float]:
+    import xml.etree.ElementTree as ET
+
+    endpoint = "https://apis.data.go.kr/1220000/nitemtrade/getNitemtradeList"
+    params = {
+        "serviceKey": api_key,
+        "strtYymm": start_period,
+        "endYymm": end_period,
+        "hsSgn": hs_code,
+        "numOfRows": "100000",
+        "pageNo": "1",
+    }
+    response = requests.get(endpoint, params=params, timeout=30)
+    time.sleep(pause)
+    if response.status_code >= 400:
+        raise RuntimeError(f"data.go.kr request failed {response.status_code}: {response.text[:300]}")
+    root = ET.fromstring(response.content)
+    result_code = root.findtext(".//resultCode")
+    result_msg = root.findtext(".//resultMsg")
+    if result_code != "00":
+        print(f"[exports] warning HS={hs_code} period={start_period}-{end_period}: {result_code} {result_msg}")
+        return {}
+    monthly: dict[str, float] = {}
+    for item in root.findall(".//item"):
+        year = item.findtext("year")
+        if not year or year == "총계":
+            continue
+        month = year.replace(".", "-")
+        value = float(item.findtext("expDlr") or 0)
+        monthly[month] = monthly.get(month, 0.0) + value
+    return monthly
+
+
+def fetch_data_go_kr_sector_exports(start_month: str, end_month: str, api_key: str, pause: float) -> pd.DataFrame:
+    rows = []
+    for sector, codes in DATA_GO_KR_SECTOR_HS.items():
+        sector_monthly: dict[str, float] = {}
+        for start_period, end_period in year_chunks(start_month, end_month):
+            for code in codes:
+                print(f"[exports] {start_period}-{end_period} {sector} HS={code}")
+                monthly = data_go_kr_get_range_hs(start_period, end_period, code, api_key, pause)
+                for month, value in monthly.items():
+                    sector_monthly[month] = sector_monthly.get(month, 0.0) + value
+        for month, value in sorted(sector_monthly.items()):
+            rows.append({"month": month, "sector": sector, "export_usd": value})
+    frame = pd.DataFrame(rows)
+    raw_path = EXPORT_RAW_DIR / f"{kst_today()}_korea_monthly_sector_exports_data_go_kr.csv"
+    frame.to_csv(raw_path, index=False, encoding="utf-8-sig")
+    return frame
+
+
 def prepare_panel(trends: pd.DataFrame, exports: pd.DataFrame, keywords: list[str]) -> pd.DataFrame:
     exports = exports.copy()
     exports["export_usd"] = pd.to_numeric(exports["export_usd"], errors="coerce")
@@ -153,8 +247,8 @@ def prepare_panel(trends: pd.DataFrame, exports: pd.DataFrame, keywords: list[st
     return panel
 
 
-def lag_matrix(series: pd.Series, max_lag: int) -> pd.DataFrame:
-    return pd.concat({f"lag_{lag}": series.shift(lag) for lag in range(1, max_lag + 1)}, axis=1)
+def lag_matrix(series: pd.Series, max_lag: int, prefix: str) -> pd.DataFrame:
+    return pd.concat({f"{prefix}_lag_{lag}": series.shift(lag) for lag in range(1, max_lag + 1)}, axis=1)
 
 
 def fit_sse(y: np.ndarray, x: np.ndarray) -> tuple[float, int, int]:
@@ -167,8 +261,8 @@ def fit_sse(y: np.ndarray, x: np.ndarray) -> tuple[float, int, int]:
 
 def granger_f_test(y: pd.Series, x: pd.Series, lag: int) -> tuple[float | None, float | None, int]:
     data = pd.DataFrame({"y": y, "x": x})
-    y_lags = lag_matrix(data["y"], lag)
-    x_lags = lag_matrix(data["x"], lag)
+    y_lags = lag_matrix(data["y"], lag, "y")
+    x_lags = lag_matrix(data["x"], lag, "x")
     design = pd.concat([data["y"], y_lags, x_lags], axis=1).dropna()
     if len(design) <= (2 * lag + 2):
         return None, None, int(len(design))
@@ -263,6 +357,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Granger analysis between Hallyu Google Trends and Korean monthly exports.")
     parser.add_argument("--trends", type=Path, default=TRENDS_PANEL, help="Normalized weekly Google Trends panel CSV.")
     parser.add_argument("--exports-csv", type=Path, help="Monthly exports CSV. Long columns: month,sector,export_usd. Wide also accepted.")
+    parser.add_argument("--data-go-kr-key", default=os.getenv("DATA_GO_KR_API_KEY", "").strip(), help="data.go.kr service key for Korea Customs nitemtrade API.")
+    parser.add_argument("--kosis-key", default=os.getenv("KOSIS_API_KEY", "").strip(), help="KOSIS API key for total monthly exports.")
     parser.add_argument("--comtrade-key", default=os.getenv("COMTRADE_API_KEY", "").strip(), help="UN Comtrade API subscription key.")
     parser.add_argument("--start-month", default="2021-06")
     parser.add_argument("--end-month", default="2026-06")
@@ -279,13 +375,19 @@ def main() -> int:
     if args.exports_csv:
         exports = load_exports_csv(args.exports_csv)
         exports_source = str(args.exports_csv)
+    elif args.data_go_kr_key and args.kosis_key:
+        total_exports = fetch_kosis_total_exports(args.start_month, args.end_month, args.kosis_key)
+        sector_exports = fetch_data_go_kr_sector_exports(args.start_month, args.end_month, args.data_go_kr_key, args.pause)
+        exports = pd.concat([total_exports, sector_exports], ignore_index=True)
+        raw_path = EXPORT_RAW_DIR / f"{kst_today()}_korea_monthly_exports_kosis_data_go_kr.csv"
+        exports.to_csv(raw_path, index=False, encoding="utf-8-sig")
+        exports_source = "KOSIS total exports + data.go.kr Korea Customs nitemtrade sector exports"
     elif args.comtrade_key:
         exports = fetch_comtrade_exports(args.start_month, args.end_month, args.comtrade_key, args.pause)
         exports_source = "UN Comtrade API"
     else:
         raise SystemExit(
-            "No export data source available. Provide --exports-csv or set COMTRADE_API_KEY. "
-            "UN Comtrade returned 401 without a subscription key in this environment."
+            "No export data source available. Provide --exports-csv, set DATA_GO_KR_API_KEY and KOSIS_API_KEY, or set COMTRADE_API_KEY."
         )
     panel = prepare_panel(trends, exports, args.keywords)
     if len(panel) < args.max_lag + 12:

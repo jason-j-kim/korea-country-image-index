@@ -81,3 +81,33 @@ Default keywords:
 - K beauty
 
 The script exports a stitched weekly panel, normalized keyword panel, PCA/IPCA proxy factors, and a backtest input file under `data/output/google_trends/`. Google Trends only allows five terms per request, so the script uses `Korea` as the anchor keyword to stitch batches.
+
+## Trends-Exports Granger Analysis
+
+Run Granger causality tests between monthly Hallyu Google Trends and Korean monthly exports:
+
+```powershell
+python scripts/analyze_trends_exports_granger.py --exports-csv data/raw/exports/korea_monthly_exports.csv
+```
+
+Accepted export CSV formats:
+
+```csv
+month,sector,export_usd
+2021-06,total_exports,54800000000
+2021-06,electronics_hs85,16000000000
+```
+
+or a wide table:
+
+```csv
+month,total_exports,electronics_hs85,cosmetics_hs3304,processed_food_hs16_21
+2021-06,54800000000,16000000000,720000000,1100000000
+```
+
+If a UN Comtrade subscription key is available, the script can fetch directly:
+
+```powershell
+$env:COMTRADE_API_KEY="..."
+python scripts/analyze_trends_exports_granger.py
+```

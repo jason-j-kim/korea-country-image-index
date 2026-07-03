@@ -59,3 +59,25 @@ To run without network collection:
 ```powershell
 python -m kci_pipeline.run_kci --offline
 ```
+
+## Google Trends Hallyu Backfill
+
+Build a 5-year weekly Google Trends panel for Hallyu keywords:
+
+```powershell
+python scripts/backfill_google_trends.py
+```
+
+Default keywords:
+
+- K wave
+- Korea
+- Seoul
+- BTS
+- K pop
+- K movie
+- K drama
+- K food
+- K beauty
+
+The script exports a stitched weekly panel, normalized keyword panel, PCA/IPCA proxy factors, and a backtest input file under `data/output/google_trends/`. Google Trends only allows five terms per request, so the script uses `Korea` as the anchor keyword to stitch batches.

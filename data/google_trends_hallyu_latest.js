@@ -1,0 +1,66 @@
+window.GOOGLE_TRENDS_HALLYU_LATEST = {
+  "date": "2026-07-03",
+  "name": "Google Trends Hallyu Weekly Backfill",
+  "timeframe": "today 5-y",
+  "geo": "global",
+  "anchor": "Korea",
+  "keywords": [
+    "K wave",
+    "Korea",
+    "Seoul",
+    "BTS",
+    "K pop",
+    "K movie",
+    "K drama",
+    "K food",
+    "K beauty"
+  ],
+  "weeks": 262,
+  "start_week": "2021-06-27",
+  "end_week": "2026-06-28",
+  "latest": {
+    "week": "2026-06-28",
+    "hallyu_attention_index": 18.944,
+    "momentum_4w": -29.132,
+    "momentum_12w": -43.953,
+    "rolling_52w_z": -2.571
+  },
+  "method": {
+    "collection": "pytrends interest_over_time, weekly 5-year panel",
+    "scaling": "Google Trends 5-keyword batches are stitched by the anchor keyword median ratio.",
+    "ipca_bootstrap": "PCA/SVD factor proxy is exported so IPCA and backtests can start before 60 live weeks accrue.",
+    "backtest_input": "Includes hallyu_attention_index, 4w/12w momentum, 52w z-score, next_4w_change, and a simple sign signal."
+  },
+  "batches": [
+    {
+      "batch_id": 1,
+      "keywords": [
+        "Korea",
+        "K wave",
+        "Seoul",
+        "BTS",
+        "K pop"
+      ],
+      "scale_to_anchor": 1.0,
+      "sample": false
+    },
+    {
+      "batch_id": 2,
+      "keywords": [
+        "Korea",
+        "K movie",
+        "K drama",
+        "K food",
+        "K beauty"
+      ],
+      "scale_to_anchor": 1.0,
+      "sample": false
+    }
+  ],
+  "outputs": {
+    "panel": "data\\output\\google_trends\\2026-07-03_google_trends_hallyu_weekly_panel.csv",
+    "normalized": "data\\output\\google_trends\\2026-07-03_google_trends_hallyu_normalized.csv",
+    "ipca_proxy_factors": "data\\output\\google_trends\\2026-07-03_google_trends_hallyu_ipca_proxy_factors.csv",
+    "backtest_input": "data\\output\\google_trends\\2026-07-03_google_trends_hallyu_backtest_input.csv"
+  }
+};
